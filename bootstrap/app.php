@@ -115,7 +115,7 @@ class_alias('Illuminate\Support\Facades\App', 'App'); // tambah ini supaya contr
 $app->router->group([
     'namespace' => 'App\Http\Controllers',
 ], function ($router) {
-    require __DIR__.'/../routes/web.php';
+    require __DIR__.'/../routes/soApi.php';
 });
 
 return $app;

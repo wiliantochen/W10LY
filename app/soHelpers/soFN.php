@@ -5,9 +5,9 @@
         die('abc');
     }
 
-	function Test123($str) {
-		return "ABCDEF".$str;
-	}
+    function Test123($str) {
+        return "ABCDEF".$str;
+    }
 
     function fnProtectHack() {
         // $computerId = $_SERVER['HTTP_USER_AGENT']." - ".$_SERVER['REMOTE_PORT']." - ".$_SERVER['REMOTE_ADDR'];
@@ -20,13 +20,13 @@
     }
 
     function fnEnCrypt($a) {
-    	$flag = false;
-									    	if ($flag) echo "<hr>";
-											if ($flag) echo "<br>Original : ".$a."<br>";
-        $a = base64_encode("Lilyana").$a;
-        $a = base64_encode($a); 			if ($flag) echo "<br>Base64_Encode : ".$a."<br>";
-        $a = strrev($a); 					if ($flag) echo "<br>Reverse : ".$a."<br>";
-        $b = str_split($a,strlen($a)/2); 	if ($flag) echo "<br>Split String (Dibagi 2)<br>Menjadi 1 : $b[0]<br>Menjadi 2 : $b[1] <br>";
+        $flag = false;
+                                            if ($flag) echo "<hr>";
+                                            if ($flag) echo "<br>Original : ".$a."<br>";
+        $a = base64_encode("WilEdi2019").$a;
+        $a = base64_encode($a);             if ($flag) echo "<br>Base64_Encode : ".$a."<br>";
+        $a = strrev($a);                    if ($flag) echo "<br>Reverse : ".$a."<br>";
+        $b = str_split($a,strlen($a)/2);    if ($flag) echo "<br>Split String (Dibagi 2)<br>Menjadi 1 : $b[0]<br>Menjadi 2 : $b[1] <br>";
         $c = str_split($b[0]);
         $d = str_split($b[1]);
 
@@ -35,40 +35,40 @@
             array_push($e, $c[$key].$d[$key]);
         }
 
-        $f = implode("",$e); 				if ($flag) echo "<br>".$f."<br>";
-        // $f = base64_decode($f); 			if ($flag) echo "<br>".$f."<br>";
+        $f = implode("",$e);                if ($flag) echo "<br>".$f."<br>";
+        // $f = base64_decode($f);          if ($flag) echo "<br>".$f."<br>";
         
-    										if ($flag) echo "<hr>";
-    	return $f;
+                                            if ($flag) echo "<hr>";
+        return $f;
 
     }
 
 
     function fnDeCrypt($a) {
-    	$flag = false;
-									    	if ($flag) echo "<hr>";
-											if ($flag) echo "<br>Original : ".$a."<br>";
+        $flag = false;
+                                            if ($flag) echo "<hr>";
+                                            if ($flag) echo "<br>Original : ".$a."<br>";
 
         $b = str_split($a);
         $c = []; $d = []; $ab = "a";
         foreach($b as $key=>$value) {
-        	if ($ab == "a") {
-            	array_push($c, $b[$key]);
-        		$ab = "b";
-        	} else {
-            	array_push($d, $b[$key]);
-        		$ab = "a";
-        	}
+            if ($ab == "a") {
+                array_push($c, $b[$key]);
+                $ab = "b";
+            } else {
+                array_push($d, $b[$key]);
+                $ab = "a";
+            }
         }
-        									if ($flag) echo "<br>Split String (Dibagi 2)<br>Menjadi 1 : ".implode("",$c)."<br>Menjadi 2 : ".implode("",$d)." <br>";
-        $e = implode("",$c).implode("",$d);	if ($flag) echo "<br>Digabung menjadi 1 : ".implode("",$c).implode("",$d)." <br>";
-        $e = strrev($e);					if ($flag) echo "<br>DiReverse : ".$e." <br>";
-        $e = base64_decode($e); 			if ($flag) echo "<br>Base64_Decode : ".$e." <br>";
-        $keys = base64_encode("Aliang");
+                                            if ($flag) echo "<br>Split String (Dibagi 2)<br>Menjadi 1 : ".implode("",$c)."<br>Menjadi 2 : ".implode("",$d)." <br>";
+        $e = implode("",$c).implode("",$d); if ($flag) echo "<br>Digabung menjadi 1 : ".implode("",$c).implode("",$d)." <br>";
+        $e = strrev($e);                    if ($flag) echo "<br>DiReverse : ".$e." <br>";
+        $e = base64_decode($e);             if ($flag) echo "<br>Base64_Decode : ".$e." <br>";
+        $keys = base64_encode("WilEdi2019");
         $e = preg_replace("/".$keys."/", "", $e,1);
         $e = json_decode($e);  
-    										if ($flag) echo "<hr>";
-    	return $e;
+                                            if ($flag) echo "<hr>";
+        return $e;
 
     }
 
@@ -84,125 +84,75 @@
     }
 
 
+
 /*=================================================================================================================================*/
 /*=======BEGIN GRID================================================================================================================*/
 /*=================================================================================================================================*/
 
     function fnCrtColGridDefault(&$Column, $Prefix) {   
 
-        fnCrtColGrid($Column, "txt", 0, 1, '', $Prefix.'RGID', 'Entry By', 100, 'left');
-        fnCrtColGrid($Column, "txt", 0, 1, '', $Prefix.'RGDT', 'Entry Date', 100, 'center');
-        fnCrtColGrid($Column, "txt", 0, 1, '', $Prefix.'CHID', 'Change By', 100, 'left');
-        fnCrtColGrid($Column, "txt", 0, 1, '', $Prefix.'CHDT', 'Change Date', 100, 'center');
-        fnCrtColGrid($Column, "num", 0, 1, '', $Prefix.'CHNO', 'Change Num', 100, 'right');
-        fnCrtColGrid($Column, "txt", 0, 1, '', $Prefix.'CSID', 'Change System By', 100, 'left');
-        fnCrtColGrid($Column, "txt", 0, 1, '', $Prefix.'CSDT', 'Change System Date', 100, 'center');
+        fnCrtColGrid($Column, "txt", 0, 0, '', $Prefix.'RGID', 'Entry By', 100, 'left');
+        fnCrtColGrid($Column, "txt", 0, 0, '', $Prefix.'RGDT', 'Entry Date', 100, 'center');
+        fnCrtColGrid($Column, "txt", 0, 0, '', $Prefix.'CHID', 'Change By', 100, 'left');
+        fnCrtColGrid($Column, "txt", 0, 0, '', $Prefix.'CHDT', 'Change Date', 100, 'center');
+        fnCrtColGrid($Column, "num", 0, 0, '', $Prefix.'CHNO', 'Change Num', 100, 'right');
+        fnCrtColGrid($Column, "txt", 0, 0, '', $Prefix.'CSID', 'Change System By', 100, 'left');
+        fnCrtColGrid($Column, "txt", 0, 0, '', $Prefix.'CSDT', 'Change System Date', 100, 'center');
 
     }   
 
     function fnCrtColGrid(&$Column, $Tipe, $Required, $Tampil, $TipeGrid, $Field, $Label, $Width, 
                                   $Align = "", $PanjangKalimat = 0) {   
 
+        if ($Align=="") {
 
-        $c = [];
-        switch (strtoupper($Tipe)) {
-            case "RNO":
-                $Align ="left";
-                $c["xtype"] = "rownumberer";
-                $c["autoSizeColumn"] = false;      
-                break;
-            case "ACT":
-                $Align ="left";
-                $c["autoSizeColumn"] = false;      
-                break;
-            case "DTP":
-                $Align ="center";
-                $c["xtype"] = "datecolumn";
-                $c["autoSizeColumn"] = true;                
-                $c["filter"] = true;
-                break;
-            case "NUM":
-                $Align ="right";
-                $c["filter"] = "number";
-                $c["autoSizeColumn"] = true;                
-                break;
-            case "TXT":
-                $Align="left";
-                $c["autoSizeColumn"] = true;                
-                // $c["filter"] = true;       
-                $c["filter"] = array(
-                                    "type" => 'string',
-                                );
-             
-                // $c["filter"] = array(
-                //                     "type" => 'string',
-                //                     "itemDefaults" =>  array(
-                //                         "emptyText" =>  'Search for...'
-                //                     )
-                //                 );
+            switch (strtoupper($Tipe)) {
+                case "ACT":
+                    $Align="left";
+                    break;
+                case "DTP":
+                    $Align="center";
+                    break;
+                case "NUM":
+                    $Align="right";
+                    break;
+                case "TXT":
+                    $Align="left";
+                    break;
+            }
 
-                break;
         }
 
-
-        $c["dataIndex"] = $Field;
-        $c["text"] = $Label;
-        $c["field"] = $Field;
-        $c["tipe"] = strtolower($Tipe);
-        $c["width"] = $Width;
-        $c["hidden"] = !$Tampil;
-        $c["lockable"] = true;
-        $c["value"] = $Field;
-        $c["xxxxx"] = "xxxx";
-        
-        $Column[] = $c;
-
-
-        // if (strtoupper($Tipe)=="RNO") {
-        //     $Column[] = array ("xtype" => "rownumberer",
-        //                        "tipe" => strtolower($Tipe),
-        //                        "text" => $Label,
-        //                        "field" => $Field,
-        //                        "width" => $Width,
-        //                        "xxxxx" => "xxxx"
-        //                 );
-        // } else {
-        //     $Column[] = array ("dataIndex" => $Field,
-        //                        "text" => $Label,
-        //                        "field" => $Field,
-        //                        "tipe" => strtolower($Tipe),
-        //                        // "tipeGrid" => strtolower($Tipe.$TipeGrid),
-        //                        "width" => $Width,
-        //                        "filter" => $filter,
-        //                        // "required" => $Required === 1 ? true : false,
-        //                        "hidden" => !$Tampil,
-        //                        // "align" => $Align,
-        //                        "lockable" => true,
-        //                        // "sortable" => false,
-        //                        // "FilterOperator" => "",
-        //                        // "FilterValue" => "",
-        //                        // "panjangKalimat" => $PanjangKalimat,
-        //                        "value" => $Field,
-        //                        // "urut" =>isset($SortArray[$Field]) ? $SortArray[$Field] : '',                           
-        //                        "xxxxx" => "xxxx");
-        // }
-
-
-
-
+        $Column[] = array ("name" => $Field,
+                           "label" => $Label,
+                           "field" => $Field,
+                           "tipe" => strtolower($Tipe),
+                           "tipeGrid" => strtolower($Tipe.$TipeGrid),
+                           "width" => $Width,
+                           "required" => $Required === 1 ? true : false,
+                           "tampil" => $Tampil === 1 ? true : false,
+                           "align" => $Align,
+                           // "sortable" => $Sortable,
+                           "sortable" => false,
+                           "FilterOperator" => "",
+                           "FilterValue" => "",
+                           "panjangKalimat" => $PanjangKalimat,
+                           "value" => $Field,
+                           // "urut" =>isset($SortArray[$Field]) ? $SortArray[$Field] : '',                           
+                           "xxxxx" => "xxxx");
     }         
 
 
     function fnQuerySearchAndPaginate($Request, $TableModel, $Obj, &$Sort, &$Filter, &$ColumnGrid) {   
 
         $Filter = [];
-        if (!is_null($Request->filter)) {
-            // $Filter = $Request->filter;
-            $Filter = json_decode($Request->filter);
+        if (!is_null($Request->cari)) {
+            $Filter = $Request->cari;
         }
-        if (!is_null($Request->sort)) {
+
+        if (!is_null($Request->urut)) {
             $Sort = [];
-            $Sort = json_decode($Request->sort);
+            $Sort = $Request->urut;
         } else {          
             $Sort = json_decode(json_encode($Sort));
         }
@@ -220,7 +170,7 @@
 
         $Col = []; $ColumnGrid = [];
         foreach($Obj as $k => $f) {
-            if (($f['tipe'] != 'act') && ($f['tipe'] != 'rno')) { $Col[] = $f['field']; }
+            if ($f['tipe'] != 'act') { $Col[] = $f['field']; }
             if ($f['tipe'] != 'hdn') { $ColumnGrid[] = $f; }
             // echo ($v[$k]);
         }
@@ -228,9 +178,8 @@
         $TableModel->select($Col);
 
         foreach ($Sort as $s) {
-            $TableModel->orderBy($s->property,$s->direction);
+            $TableModel->orderBy($s->name,$s->direction);
         }
-
 
         $condition = "";
         if (!is_null($Request->AllColumns)) {
@@ -256,23 +205,23 @@
                 $condition = $condition."And";
             }
 
-            $nilai = str_replace("'","''",$f->value);
+            $nilai = str_replace("'","''",$f->filterValue);
 
-            if($f->operator == 'in') {
-                // $TableModel->whereIn($f->property, explode(',', $f->filterValue));
-                $condition = $condition." ".$B1.$f->property.$B2." "." in (".explode(',', $nilai).")";
-            } else if($f->operator == 'like') {
-                // $TableModel->where($f->property, 'LIKE', '%'.$f->filterValue.'%');
-                $condition = $condition." ".$B1.$f->property.$B2." "." like '%".$nilai."%'";
-            } else if($f->operator == 'likeRight') {
-                // $TableModel->where($f->property, 'LIKE', $f->filterValue.'%');
-                $condition = $condition." ".$B1.$f->property.$B2." "." like '".$nilai."%'";
+            if($f->filterOperator == 'in') {
+                // $TableModel->whereIn($f->field, explode(',', $f->filterValue));
+                $condition = $condition." ".$B1.$f->field.$B2." "." in (".explode(',', $nilai).")";
+            } else if($f->filterOperator == 'like') {
+                // $TableModel->where($f->field, 'LIKE', '%'.$f->filterValue.'%');
+                $condition = $condition." ".$B1.$f->field.$B2." "." like '%".$nilai."%'";
+            } else if($f->filterOperator == 'likeRight') {
+                // $TableModel->where($f->field, 'LIKE', $f->filterValue.'%');
+                $condition = $condition." ".$B1.$f->field.$B2." "." like '".$nilai."%'";
             } else {
-                // $TableModel->where($f->property, $f->operator, $f->filterValue);
-                $condition = $condition." ".$B1.$f->property.$B2." "." ".$f->operator." '".$nilai."'";
+                // $TableModel->where($f->field, $f->filterOperator, $f->filterValue);
+                $condition = $condition." ".$B1.$f->field.$B2." "." ".$f->filterOperator." '".$nilai."'";
             }
         }  
-
+        
         if (!is_null($Request->SubMethod)) {
             if (rtrim($Request->SubMethod) != "") {
                 if($condition != "") {
@@ -302,24 +251,17 @@
         // dd($sql);
         // dd($TableModel);
 
-        // dd($Request->limit);
+        // dd($Request->perPage);
         // dd($TableModel->count());
-        if (!is_null($Request->limit)) {
-            if($Request->limit != "0") {
+        if (!is_null($Request->perPage)) {
+            if($Request->perPage != "0") {
                 // $page = $Request->page;
                 // $perPage = $Request->perPage;
                 // $offset = ($page * $perPage) - $perPage;
                 // return $TableModel->offset($offset)->limit($perPage)->get();
-                return $TableModel->paginate($Request->limit);
+                return $TableModel->paginate($Request->perPage);
             }
-        }       
-
-
-        // if (!is_null($Request->perPage)) {
-        //     if($Request->perPage != "0") {
-        //         return $TableModel->paginate($Request->perPage);
-        //     }
-        // }                 
+        }        
         return $TableModel->paginate($TableModel->count());
         
 
@@ -332,29 +274,27 @@
 
 
 
+
+
+
+
 /*=================================================================================================================================*/
 /*======BEGIN STANDARD OBJECT======================================================================================================*/
 /*=================================================================================================================================*/
-    function fnCrtObj(&$Obj, $cm, $Show, $Required, $FFTipe, $Mode, $Tipe, $Code, $Name, $Description) {   
-        // if ($Description == "") { $Description = $Name; }
+    function fnCrtObj(&$Obj, $Show, $FFTipe, $Mode, $Tipe, $Panel, $Code, $Name, $Description, $Required) {   
+        if ($Description == "") { $Description = $Name; }
         $Obj[$Code] = array(
-// classic
-                       "name" => $Code,
-                       "fieldLabel" => $Name, 
-                       "emptyText" => $Description, 
-                       "reference" => $Code,
-                       "labelAlign" => $cm === "classic" ? "right" : "top", //placeholder (saat view, gak ada label) , top
+                       "Code" => $Code,
                        "Tipe" => strtolower($Tipe), 
-                       "TObj" => "so",
+                       "Panel" => $Panel, 
                        "Mode" => $Mode, 
-                       "hidden" => $Show === 1 ? false : true,
+                       "ReadOnly" => false, 
+                       "Show" => $Show === 1 ? true : false,
                        "FFTipe" => $FFTipe,  // FillForm Type Untuk Query Field Fill Form
-                       "allowBlank" => $Required === 0 ? true : false,
-// modern
-                       "label" => $Name, 
-                       "clearIcon" => false, 
-                       "placeHolder" => $Description, 
-                       "required" => $Required === 0 ? true : false,
+                       "Required" => $Required,
+                       "Name" => $Name,
+                       "Description" => $Description, 
+                       "Value" => ''
                        );
     }        
 
@@ -368,180 +308,170 @@
 
 
 
+
+
+
+
 /*=================================================================================================================================*/
 /*======BEGIN OBJECT===============================================================================================================*/
 /*=================================================================================================================================*/
 
-    function fnCrtObjDefault(&$Obj, $cm, $Prefix) {   
-        fnCrtObjTxt($Obj, $cm, 0, 0, "FF", "3", $Prefix."RGID", "Register ID", "", 200, 200);
-        fnCrtObjTxt($Obj, $cm, 0, 0, "FF", "3", $Prefix."RGDT", "Register Date", "", 200, 200);
-        fnCrtObjTxt($Obj, $cm, 0, 0, "FF", "3", $Prefix."CHID", "Change ID", "", 200, 200);
-        fnCrtObjTxt($Obj, $cm, 0, 0, "FF", "3", $Prefix."CHDT", "Change Date", "", 200, 200);
-        fnCrtObjNum($Obj, $cm, 0, 0, "FF", "3", $Prefix."CHNO", "Change Num", "", 200, 200);
-        fnCrtObjTxt($Obj, $cm, 0, 0, "FF", "3", $Prefix."CSID", "Change System ID", "", 200, 200);
-        fnCrtObjTxt($Obj, $cm, 0, 0, "FF", "3", $Prefix."CSDT", "Change System Date", "", 200, 200);
+    function fnCrtObjDefault(&$Obj, $Prefix) {   
+        fnCrtObjTxt($Obj, 1, "FF", "3", "PnlXXX", $Prefix."RGID", "Register ID", "", false);
+        fnCrtObjTxt($Obj, 1, "FF", "3", "PnlXXX", $Prefix."RGDT", "Register Date", "", false);
+        fnCrtObjTxt($Obj, 1, "FF", "3", "PnlXXX", $Prefix."CHID", "Change ID", "", false);
+        fnCrtObjTxt($Obj, 1, "FF", "3", "PnlXXX", $Prefix."CHDT", "Change Date", "", false);
+        fnCrtObjNum($Obj, 1, "FF", "3", "PnlXXX", $Prefix."CHNO", "Change Num", "", false);
+        fnCrtObjTxt($Obj, 1, "FF", "3", "PnlXXX", $Prefix."CSID", "Change System ID", "", false);
+        fnCrtObjTxt($Obj, 1, "FF", "3", "PnlXXX", $Prefix."CSDT", "Change System Date", "", false);
     }  
 
-    function fnCrtObjTxt(&$Obj, $cm, $Show, $Required, $FFTipe, $Mode, $Code, $Name, $Description = "", 
-                                $LabelWidth = 0, $Width = 0,
+    function fnCrtObjTxt(&$Obj, $Show, $FFTipe, $Mode, $Panel, $Code, $Name, $Description = "", $Required, 
                                 $Min = 0, $Max = 0, $Capital = "", $Prefix = "", $Suffix = "") {   
         /* 
             $Capital = ['Normal','Big','Small'] 
          */        
-
         if ($Capital == "") { $Capital = "Normal"; }
-        fnCrtObj($Obj, $cm, $Show, $Required, $FFTipe, $Mode, "txt", $Code, $Name, $Description);
-        fnUpdObj($Obj, $Code, array("xtype" => "textfield",
-                                    "labelWidth" => $LabelWidth,  
-                                    "width" => $cm === "classic" ? $LabelWidth+$Width : $Width,
-                                    // "Prefix" => $Prefix,  
-                                    // "Suffix" => $Suffix,
-                                    "Capital" => strtoupper($Capital)) );
-        if ( ($Min+$Max) > 0) {
-            fnUpdObj($Obj, $Code, array("minLength" => $Min, 
-                                        "maxLength" => $Max,
-                                        "enforceMaxLength" => true));
-        }
-
-    } 
-
-
-
-    function fnCrtObjRmk(&$Obj, $cm, $Show, $Required, $FFTipe, $Mode, $Code, $Name, $Description = "", 
-                                $LabelWidth = 0, $Width = 0,
-                                $Height = 100) {   
-        fnCrtObj($Obj, $cm, $Show, $Required, $FFTipe, $Mode, "rmk", $Code, $Name, $Description );
-        if ($cm === "classic") {
-            fnUpdObj($Obj, $Code, array("xtype" => "textareafield",
-                                        "labelWidth" => $LabelWidth,  
-                                        "width" => $cm === "classic" ? $LabelWidth+$Width : $Width,
-                                        // "fieldStyle" => "min-height: 200px", 
-                                        "height" => $Height) );
-        } else {
-            fnUpdObj($Obj, $Code, array("xtype" => "textareafield",
-                                        "labelWidth" => $LabelWidth,  
-                                        "width" => $cm === "classic" ? $LabelWidth+$Width : $Width,
-                                        // "fieldStyle" => "min-height: 200px", 
-                                        ));
-        }
-
-    } 
-
-
-    function fnCrtObjNum(&$Obj, $cm, $Show, $Required, $FFTipe, $Mode, $Code, $Name, $Description = "",  
-                                $LabelWidth = 0, $Width = 0,
-                                $Decimal = 0, $Prefix = "", $trigger = true, $Step = 1, $MinValue = 0, $MaxValue = 0) { 
-
-        fnCrtObj($Obj, $cm, $Show, $Required, $FFTipe, $Mode, "num", $Code, $Name, $Description);
-        fnUpdObj($Obj, $Code, array("xtype" => "numberfield",
-                                    "labelWidth" => $LabelWidth,  
-                                    "width" => $cm === "classic" ? $LabelWidth+$Width : $Width,
-                                    "Step" => $Step,
-                                    "fieldStyle" => "text-align: right",  
+        fnCrtObj($Obj, $Show, $FFTipe, $Mode, "txt", $Panel, $Code, $Name, $Description, $Required);
+        fnUpdObj($Obj, $Code, array("Min" => $Min, 
+                                    "Max" => $Max,
                                     "Prefix" => $Prefix,  
-                                    "hideTrigger" => $trigger,
-                                    "ValueNum" => 0,) );
-        if ( $MinValue <> 0) {
-            fnUpdObj($Obj, $Code, array("minValue" => $MinValue,) );
-        }
-        if ( $MaxValue <> 0) {
-            fnUpdObj($Obj, $Code, array("maxValue" => $MaxValue,) );
-        }
-        if ( $Decimal > 0) {
-            fnUpdObj($Obj, $Code, array("allowDecimals" => true,
-                                        "decimalPrecision" => $Decimal,) );
-        }
-
-    } 
-
-    function fnCrtObjDtp(&$Obj, $cm, $Show, $Required, $FFTipe, $Mode, $Code, $Name, $Description = "", 
-                                $LabelWidth = 0, $Width = 180, 
-                                $FormatDisplay="d-F-Y", $Min = "", $Max = "") {
-        fnCrtObj($Obj, $cm, $Show, $Required, $FFTipe, $Mode, "dtp", $Code, $Name, $Description);
-        fnUpdObj($Obj, $Code, array("xtype" => $cm === "classic" ? "datefield" : "datepickerfield", 
-                                    "labelWidth" => $LabelWidth,  
-                                    "width" => $cm === "classic" ? $LabelWidth+$Width : $Width,
-                                    "format" => $FormatDisplay, // date("m/d/Y")
-                                    "destroyPickerOnHide" => true, 
-                                    "Min" => $Min, 
-                                    "Max" => $Max) );
-    } 
-
-    function fnCrtObjRad(&$Obj, $cm, $Show, $Required = true, $FFTipe, $Mode, $Code, $Name, $Description = "", 
-                                $LabelWidth = 0, $Width = "0", $DefaultValue, 
-                                $TableCode, $Condition = "", $Table="SYSDAT") {   
-
-        $ListData = fnGetComboData( ($cm === "classic" ? $cm : $cm."Rad"), $Code, $Table, $TableCode, $DefaultValue, $Condition = "");
-        // dd($ListData);
-        fnCrtObj($Obj, $cm, $Show, $Required, $FFTipe, $Mode, "rad", $Code, $Name, $Description);
-        if ($cm === "classic") {
-            fnUpdObj($Obj, $Code, array("xtype" => "radiogroup",
-                                        "labelWidth" => $LabelWidth,  
-                                        // "width" => $LabelWidth+$Width,
-                                        "columns" => explode(',', $Width),
-                                        "vertical" => true,  
-                                        "items" => $ListData,) );
-        } else {
-            fnUpdObj($Obj, $Code, array("xtype" => "fieldset",
-                                        "title" => $Name,  
-                                        "labelWidth" => ($LabelWidth/2),   
-                                        "items" => $ListData,) );
-        }
-
+                                    "Suffix" => $Suffix,
+                                    "Capital" => strtoupper($Capital)) );
     } 
 
 
-    function fnCrtObjChk(&$Obj, $cm, $Show, $Required = true, $FFTipe, $Mode, $Code, $Name, $Description = "", 
-                                $LabelWidth = 0, $Width = "0", $DefaultValue, 
-                                $TableCode, $Condition = "", $Table="SYSDAT") {   
+    function fnCrtObjNum(&$Obj, $Show, $FFTipe, $Mode, $Panel, $Code, $Name, $Description = "", $Required, 
+                                $Decimal = 0, $Prefix = "", $Suffix = "", $Step = 1, $MinValue = 0, $MaxValue = 0) {   
+        fnCrtObj($Obj, $Show, $FFTipe, $Mode, "num", $Panel, $Code, $Name, $Description, $Required);
+        fnUpdObj($Obj, $Code, array("Decimal" => $Decimal,
+                                    "Step" => $Step,
+                                    "Prefix" => $Prefix,  
+                                    "Suffix" => $Suffix,
+                                    "ValueNum" => 0,
+                                    "MinValue" => $MinValue, 
+                                    "MaxValue" => $MaxValue,) );
+    } 
 
-        $ListData = fnGetComboData( ($cm === "classic" ? $cm : $cm."Chk"), $Code, $Table, $TableCode, $DefaultValue, $Condition = "");
-        // dd($ListData);
-        fnCrtObj($Obj, $cm, $Show, $Required, $FFTipe, $Mode, "chk", $Code, $Name, $Description);
-        if ($cm === "classic") {
-            fnUpdObj($Obj, $Code, array("xtype" => "checkboxgroup",
-                                        "labelWidth" => $LabelWidth,  
-                                        // "width" => $LabelWidth+$Width,
-                                        "columns" => explode(',', $Width),
-                                        "vertical" => true,  
-                                        "items" => $ListData,) );
-        } else {
-            fnUpdObj($Obj, $Code, array("xtype" => "fieldset",
-                                        "title" => $Name, 
-                                        "labelWidth" => ($LabelWidth/2),   
-                                        "items" => $ListData,) );
-        }
+    function fnCrtObjCmb(&$Obj, $Show, $FFTipe, $Mode, $Panel, $Code, $Name, $Description = "", $DefaultValue, 
+                                $Jenis, $TableCode, $Required = true, $Split = "", $Condition = "", $Table="SYSDAT") {   
 
+        $ListData = fnGetComboData($Table, $TableCode, $Condition = "");
+        /* 
+            $Jenis = ['Single','Radio','Multiple'] 
+         */
+        fnCrtObj($Obj, $Show, $FFTipe, $Mode, "cmb", $Panel, $Code, $Name, $Description, $Required);
+        fnUpdObj($Obj, $Code, array("Jenis" => strtoupper($Jenis),
+                                    "DefaultValue" => $DefaultValue,
+                                    "Options" => $ListData,
+                                    "SplitParam" => $Split) );
+    } 
+
+    function fnCrtObjRad(&$Obj, $Show, $FFTipe, $Mode, $Panel, $Code, $Name, $Description = "", $DefaultValue, 
+                                $Jenis, $TableCode, $Required = true, $Split = "", $Condition = "", $Table="SYSDAT") {   
+
+        $ListData = fnGetComboData($Table, $TableCode, $Condition = "");
+        /* 
+            $Jenis = ['Radio','Toggle'] 
+         */
+        fnCrtObj($Obj, $Show, $FFTipe, $Mode, "rad", $Panel, $Code, $Name, $Description, $Required);
+        fnUpdObj($Obj, $Code, array("Title" => $Name,
+                                    "Jenis" => strtolower($Jenis),
+                                    "DefaultValue" => $DefaultValue,
+                                    "Value" => strtolower($Jenis) == 'toggle' ? [] : '',
+                                    "Options" => $ListData,
+                                    "SplitParam" => $Split) );
+    } 
+
+    function fnCrtObjTog(&$Obj, $Show, $FFTipe, $Mode, $Panel, $Code, $Name, $Description = "", $DefaultValue, 
+                                $Left = false) {   
+        /* 
+            $Value = true || false
+         */
+        fnCrtObj($Obj, $Show, $FFTipe, $Mode, "tog", $Panel, $Code, $Name, $Description, true);
+        fnUpdObj($Obj, $Code, array("Left" => $Left,
+                                    "DefaultValue" => $DefaultValue) );
 
     } 
 
-
-    function fnCrtObjGrd($cm, $Reference, $Controller, $Method, $Columns = "", $PageSize = 15) {        
-        $Grid  = "";
-        $Grid .= "{";  
-        $Grid .= "    xtype: 'xtGrid',";
-        $Grid .= "    reference: '".$Reference."',";
-        if ($cm==="modern") {
-        $Grid .= "    columns: ".json_encode($Columns).",";
-        }
-        $Grid .= "    store: {";
-        $Grid .= "        type: 'stGrid',";
-        $Grid .= "        reference: '".$Reference."Store',";
-        $Grid .= "        pageSize: ".(strtoupper($PageSize) === 'ALL' ? 99999999999999 : $PageSize).",";
-        $Grid .= "        gridParams: {";
-        $Grid .= "            c: '".$Controller."', ";
-        $Grid .= "            m: '".$Method."', ";
-        $Grid .= "            g: '".$Reference."', ";
-        $Grid .= "        }";
-        $Grid .= "    },";
-        $Grid .= "}";
-        return $Grid;
+    function fnCrtObjRmk(&$Obj, $Show, $FFTipe, $Mode, $Panel, $Code, $Name, $Description = "", $Required, 
+                                $Height = 100) {   
+        fnCrtObj($Obj, $Show, $FFTipe, $Mode, "rmk", $Panel, $Code, $Name, $Description, $Required );
+        fnUpdObj($Obj, $Code, array("Height" => $Height) );
     } 
+
+
+    function fnCrtObjPop(&$Obj, $Show, $FFTipe, $Mode, $Panel, $Code, $popCode, $popDesc, $Name, $Description = "", $Required, 
+                                $popTable, $popQuery=true, $searchChar=3, $popCondition="") {
+
+        $SubMethod = "";
+        fnCrtObj($Obj, $Show, $FFTipe, $Mode, "pop", $Panel, $Code, $Name, $Description, $Required);
+
+        if(!$popQuery) {
+            if(substr(strtoupper($popTable),0,6) === "SYSDAT") {
+                $SubMethod = str_replace("SYSDAT_", "", strtoupper($popTable));
+                $popTable = "SYSDAT";
+            } 
+        }
+
+        fnUpdObj($Obj, $Code, array("ReadOnly" => true,
+                                    "Controller" => $popQuery === true ? $popTable : "LOADGRID",
+                                    "Method" => $popQuery === true ? "LoadGrid" : $popTable,
+                                    "ShowPopUpModal"=>false,
+                                    "Pops"=>array($popCode=>array("Value"=>"",
+                                                                  "Show"=>true),
+                                                  $popDesc=>array("Value"=>"",
+                                                                  "Show"=>true),
+                                                  $popCode.$popDesc=>array("Value"=>"",
+                                                                           "Disabled"=>false)),
+                                    "Grid"=>"",
+                                    "SearchChar" => $searchChar,
+                                    "PopCode" => $popCode,
+                                    "PopDesc" => $popDesc,
+                                    "PopData" => "") );
+
+    }
+
+    function fnCrtObjDtp(&$Obj, $Show, $FFTipe, $Mode, $Panel, $Code, $Name, $Description = "", $Required, $DateType="date",
+                                $FormatDisplay="D-MMMM-YYYY", $Min = "", $Max = "") {
+        fnCrtObj($Obj, $Show, $FFTipe, $Mode, "dtp", $Panel, $Code, $Name, $Description, $Required);
+        fnUpdObj($Obj, $Code, array( "DateType" => $DateType, 
+                                            "FormatDisplay" => $FormatDisplay, 
+                                            "Min" => $Min, 
+                                            "Max" => $Max) );
+    } 
+
+
+
+    function fnCrtObjGrd(&$Obj, $Show, $FFTipe, $Mode, $Panel, $Code, $Name, $Required, $action, 
+                            $controller, $methodGrid) {
+        fnCrtObj($Obj, $Show, $FFTipe, $Mode, "grd", $Panel, $Code, $Name, $Name, $Required);
+        fnUpdObj($Obj, $Code, array( "Controller" => $controller,
+                                     "Method" => $methodGrid,
+                                     "Action" => $action,
+                                     "OpenForm" => true,
+                                     "SaveForm" => true,
+                                     "GrdAuth" => "",
+                                     "GrdKey" => "") );
+    }
 
 /*=================================================================================================================================*/
-/*======END OBJECT===============================================================================================================*/
+/*======END OBJECT=================================================================================================================*/
 /*=================================================================================================================================*/
 
+
+
+
+    function fnGetCompIY($CompanyCode) {
+
+        $SYSCOM = DB::table("SYSCOM")
+                        ->Select('SCCOMPIY')
+                        ->where('SCCOMP','=',$CompanyCode)
+                        ->first();
+        
+        return $SYSCOM->SCCOMPIY;
+    
+    }
 
 
     function fnGetRec($Table, $Field, $FieldKey, $FieldKeyValue, $Condition) {
@@ -562,9 +492,8 @@
         return $Rec[0];
     
     }
-    
-    function fnGetComboData($cm, $ObjCode, $Table, $TableCode, $DefaultValue, $Condition = "") {
 
+    function fnGetComboData($Table, $TableCode, $Condition = "") {
         $ListData = [];
         switch (strtoupper($Table)) {
             case "SYSDAT":
@@ -577,33 +506,17 @@
                 // dd($Condition);
 
                 $NamespacedModel = 'App\\Models\\' . $Model;
-                $Table = $NamespacedModel::select('SDDATA','SDNAME')
-                                            ->leftJoin('SYSTBL', 'STTABLIY', 'SDTABLIY')
-                                            ->where($Condition)
-                                            ->get();
+                $Table = $NamespacedModel::noLock()
+                            ->select('SDDATA','SDNAME')
+                            ->leftJoin('SYSTBL', 'STTABLIY', 'SDTABLIY')
+                            ->where($Condition)
+                            ->get();
+
                 // dd($Table);
-
                 foreach($Table as $row) {  // Begin Looping Record ListData  
-                    if ($cm === "classic") {
-                        $ListData[] = array("boxLabel"=> rtrim($row->SDNAME),
-                                            "checked"=> strtoupper(rtrim($row->SDDATA)) == strtoupper(rtrim($DefaultValue)) ? true : false,  
-                                            // "icon"=> 'home', 
-                                            "name"=> $ObjCode,  
-                                            "inputValue"=>rtrim($row->SDDATA)) ; 
-                    } else if ($cm === "modernRad") {
-                        $ListData[] = array("xtype"=> "radiofield",
-                                            "label"=> rtrim($row->SDNAME), 
-                                            "value"=>rtrim($row->SDDATA), 
-                                            "checked"=> strtoupper(rtrim($row->SDDATA)) == strtoupper(rtrim($DefaultValue)) ? true : false,  
-                                            "name"=> $ObjCode) ; 
-                    } else if ($cm === "modernChk") {
-                        $ListData[] = array("xtype"=> "checkboxfield",
-                                            "label"=> rtrim($row->SDNAME), 
-                                            "value"=>rtrim($row->SDDATA), 
-                                            "checked"=> strtoupper(rtrim($row->SDDATA)) == strtoupper(rtrim($DefaultValue)) ? true : false,  
-                                            "name"=> $ObjCode) ; 
-                    }
-
+                    $ListData[] = array("label"=> rtrim($row->SDNAME),
+                                        // "icon"=> 'home',  
+                                        "value"=>rtrim($row->SDDATA)) ; 
                 } // End Looping Record ListData
                 // dd($ListData);
 
@@ -624,12 +537,12 @@
 /*======================================================================================================================*/
 
 
-    // function fnFillGrid($Data) {
-    //     $Hasil = $Data;
-    //     $Hasil = json_encode($Hasil);
-    //     $Hasil = json_decode($Hasil, true);
-    //     return $Hasil['original'];
-    // }
+    function fnFillGrid($Data) {
+        $Hasil = $Data;
+        $Hasil = json_encode($Hasil);
+        $Hasil = json_decode($Hasil, true);
+        return $Hasil['original'];
+    }
 
 
     function fnGenDelimiter($length = 10) {
@@ -751,7 +664,6 @@
 
         }  // End Check Change System Date
 
-
         if ($Obj["Menu"]!="") {  // Begin Check BackDate 
             $arrMENU = fnGetRec("TBLMNU","TMMENU,TMBFDT,TMFWDT", "TMURLW", $Obj["Menu"], "") ;
 
@@ -852,25 +764,23 @@
         return $NoTRS;    
     }
 
-    function fnSetExecuteQuery ($user, $cm, $Params = "") {
-        $UserName = $user->TUUSER;
-        $CompIY = $user->TUCOMPIY;
+    function fnSetExecuteQuery ($UserName, $cm, $Params = "") {
         $HasilExec = null;
+
         try{
             DB::enableQueryLog();            
-            $HasilExec = DB::transaction(function () use($cm) {
+            $HasilExec = DB::transaction(function () use($UserName, $cm) {
                 return App::call('\App\Http\Controllers\Forms\\'.$cm);
             });
-
             $QueryLog = DB::getQueryLog();
-            fnSaveSqlSintax($QueryLog, $UserName, $CompIY );
+            fnSaveSqlSintax($QueryLog, $UserName);
             $BerHasil = true;
         } catch (\Exception $e){ 
 
             $message = "";
             $message = $e->errorInfo[2];
             // $eCode = $e;
-            $eCode = fnSaveSqlError($e, $UserName, $CompIY );
+            $eCode = fnSaveSqlError($e, $UserName);
             // $message = $a->sql;
             $BerHasil = false;
         }        
@@ -923,9 +833,11 @@
 
     }
 
-    function fnSaveSqlSintax($QueryLog, $UserName, $CompIY) {
+    function fnSaveSqlSintax($QueryLog, $UserName) {
 
         $TQSTMT = fnGetSqlSintax($QueryLog);
+
+        $CompIY = App::call('\App\Http\Controllers\cWeRequest@getCompIY');
 
         $TABLE = 'App\\Models\\TBLSLF';
         $TBLSLF = new $TABLE;
@@ -949,7 +861,7 @@
 
     }
 
-    function fnSaveSqlError($exception, $UserName, $CompIY) {
+    function fnSaveSqlError($exception, $UserName) {
         $sql = $exception->getSql();
         $bindings = $exception->getBindings();
 
@@ -975,6 +887,8 @@
             'sql_state'  => $errorInfo[0],
             'error_code' => $errorInfo[1]
         ];
+
+        $CompIY = App::call('\App\Http\Controllers\cWeRequest@getCompIY');
 
         $TEREMK = fnGetSqlSintax(DB::getQueryLog());
         $TEREMK .= $query;
@@ -1017,4 +931,174 @@
 
 
 
-?>
+
+/*======================================================================================================================*/
+/*======BEGIN REPORTING=================================================================================================*/
+/*======================================================================================================================*/
+
+    function fnFormatNumber($nilai, $dec, $n = ".", $d = ",") {
+        return number_format($nilai, $dec, $n, $d);
+    }
+
+    function fnFormatTanggal($nilai, $format) {
+        // $date = new DateTime('2000-01-01');
+        // echo $date->format('Y-m-d H:i:s');
+        $t = str_split($nilai,2);
+        $tanggal = new DateTime($t[0].$t[1]."-".$t[2]."-".$t[3]);
+        $value = "";
+        switch (strtoupper($format)) {
+            case "DDMMMYYYY":
+                $value = $tanggal->format('d-M-Y');
+                break;
+            case "DDMMMMYYYY":
+                $value = $tanggal->format('d-F-Y');
+                break;
+            default:
+                $value = $tanggal->format('d-F-Y');
+                break;
+        }        
+        return $value;
+    }
+
+    function fnStringEnter($nilai, $charLength) {
+        $b = $nilai;
+        if ($charLength!=0) {
+            $a = str_split($nilai,$charLength);
+            // $b .= "-".count($a);
+            if(count($a)!=0) {
+                $b = implode("\n",$a);
+            }
+        }
+        return $b;
+    }
+
+    function fnReportDoDetail($pdf, $rows, $columns, $rowHeight, $rowWrapText) {
+
+        $line = 0;
+        if($rowWrapText==true) { // Begin Cari Jumlah Baris Enter
+            foreach($columns as $col) {  // Begin Looping Columns
+                $nilai = fnStringEnter($rows[$col['field']], $col['charLength']);
+                if (is_string($nilai)) {
+                    $nilai = fnStringEnter(rtrim($rows[$col['field']]), $col['charLength']);
+                    $lineEnter = count(explode("\n", $nilai))-1;
+                    $line = ($lineEnter > $line ? $lineEnter : $line);
+                }
+            } // End Looping Columns
+        } // End Cari Jumlah Baris Enter
+        $lineEnter = 0;
+Atas:
+        $colStart = 0;
+        $colEnd = count($columns)-1;
+        foreach($columns as $col) {  // Begin Looping Columns
+
+            $value = "";
+            switch (strtoupper($col['type'])) {
+                case "TXT":
+                    if($rowWrapText==true) {
+                        $value = fnStringEnter(rtrim($rows[$col['field']]), $col['charLength']);
+                    } else {
+                        $value = rtrim($rows[$col['field']]);
+                    } 
+                    // $value .= count($columns);
+                    // $value .= $columns[0]['field'];
+                    // $value .= $line;
+                    break;
+                case "NUM":
+                    $value = fnFormatNumber($rows[$col['field']], 0, '.', ',');
+                    if(isset($col['decimal'])) {
+                        $value = fnFormatNumber($rows[$col['field']], $col['decimal'], '.', ',');
+                    }   
+                    break;
+                case "DTP":
+                    $value = rtrim($rows[$col['field']]);
+                    $format = ( isset($col['format']) === true ? $col['format'] : '' );
+                    $value = fnFormatTanggal($value, $format);
+                    break;
+                default:
+                    $value = $rows[$col['field']];
+                    break;
+            }
+            
+            $border = ($colStart === 0 ? 'LB' : $colStart === $colEnd ? 'LRB' : 'LB');
+            if ($line != 0) {
+                $border = str_replace("B","",$border);
+            }
+            if ($lineEnter!=0) {
+                $v = $value;
+                $value = "";
+                if (strtoupper($col['type'])=="TXT") {
+                    $vArr = explode("\n", $v);
+                    $vArrTotal = count($vArr);
+                    // $value = (count($vArr)-1)." - ".$lineEnter." - ".$vArrTotal." , ";
+                    if (($vArrTotal!=1) && ($vArrTotal >= $lineEnter)) {
+                        $value = $vArr[$lineEnter];
+                    }
+                }
+            } else {                
+                $vArr = explode("\n", $value);
+                $value = $vArr[0];
+            }
+
+
+            $pdf->Cell($col['length'], 
+                       $rowHeight, 
+                       $value , 
+                       $border, 
+                       0, 
+                       $col['align']);
+
+            $colStart++;
+        } // End Looping Columns
+        $pdf->ln();
+
+        if ($line!=0) {
+            $line--; $lineEnter++;
+            goto Atas;
+        }
+        // $pdf->Cell(50, 25, 'End Do Detail!',0,0,'C');
+        // $pdf->Cell(50, 25, 'Tambahan!','LTBR',1,'C');
+    }
+
+
+
+    function fnReportDoHeader($pdf, $columns, $rowHeight) {
+
+        $line = 0;
+        foreach($columns as $col) {  // Begin Looping Columns
+            $nilai = $col['label'];
+            if (is_string($nilai)) {
+                $nilai = rtrim($nilai);
+                $lineEnter = count(explode("\n", $nilai))-1;
+                $line = ($lineEnter > $line ? $lineEnter : $line);
+            }
+        } // End Looping Columns
+
+        $lineEnter = 0;
+Atas:        
+        foreach($columns as $col) {  // Begin Looping Columns
+            $nilai = explode("\n", $col['label']);
+            $value = isset($nilai[$lineEnter]) === true ? $nilai[$lineEnter] : '';
+
+            $border = 'LR';
+            if ($line == 0) { $border .= 'B'; }
+            if ($lineEnter == 0) { $border .= 'T'; }
+            
+            $pdf->Cell($col['length'], 
+                       $rowHeight, 
+                       $value, 
+                       $border, 
+                       0, 
+                       'C');
+
+        } // End Looping Columns
+        $pdf->ln();
+
+        if ($line!=0) {
+            $line--; $lineEnter++;
+            goto Atas;
+        }
+    }
+
+/*======================================================================================================================*/
+/*======END REPORTING===================================================================================================*/
+/*======================================================================================================================*/
