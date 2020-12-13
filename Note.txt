@@ -1,0 +1,36 @@
+https://github.com/wiliantochen/W10LY.git
+------------------------------------------------------------------------------------------------------------------------
+
+Command Dos C:\nginx\html\SOAPI\lumen new TOKO
+Command Dos C:\nginx\html\SOAPI\TOKO\php -S localhost:9999 -t public
+
+Command Dos C:\nginx\html\SOAPI\TOKO\php artisan config:cache --env=MySQL
+
+Command Dos C:\nginx\html\SOAPI\TOKO\composer require tymon/jwt-auth:"^1.0@dev"
+Command Dos C:\nginx\html\SOAPI\TOKO\composer require tymon/jwt-auth:"^1.0.*" <-- Pakai yang ini
+
+
+Command Dos C:\nginx\html\SOAPI\TOKO\php artisan jwt:secret
+
+Command Dos C:\nginx\html\SOAPI\TOKO\composer dump-autoload
+Command Dos C:\nginx\html\SOAPI\TOKO\php artisan migrate:fresh
+
+Command Dos C:\nginx\html\SOAPI\TOKO\composer require flipbox/lumen-generator
+
+
+
+
+
+Command Dos C:\nginx\html\Project01\L01\php artisan migrate
+Command Dos C:\nginx\html\Project01\L01\php artisan migrate:fresh    (ini delete semua table dan insert ulang semua table)
+Command Dos C:\nginx\html\Project01\L01\php artisan migrate:fresh --seed 
+
+Command Dos C:\nginx\html\Project01\L01\php artisan db:seed --class=xxxxx 
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+sencha app watch
+sencha app build classic production
+sencha app testing
