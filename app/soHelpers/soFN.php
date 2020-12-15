@@ -23,7 +23,7 @@
         $flag = false;
                                             if ($flag) echo "<hr>";
                                             if ($flag) echo "<br>Original : ".$a."<br>";
-        $a = base64_encode("WilEdi2019").$a;
+        $a = base64_encode("Aliang2020").$a;
         $a = base64_encode($a);             if ($flag) echo "<br>Base64_Encode : ".$a."<br>";
         $a = strrev($a);                    if ($flag) echo "<br>Reverse : ".$a."<br>";
         $b = str_split($a,strlen($a)/2);    if ($flag) echo "<br>Split String (Dibagi 2)<br>Menjadi 1 : $b[0]<br>Menjadi 2 : $b[1] <br>";
@@ -64,7 +64,7 @@
         $e = implode("",$c).implode("",$d); if ($flag) echo "<br>Digabung menjadi 1 : ".implode("",$c).implode("",$d)." <br>";
         $e = strrev($e);                    if ($flag) echo "<br>DiReverse : ".$e." <br>";
         $e = base64_decode($e);             if ($flag) echo "<br>Base64_Decode : ".$e." <br>";
-        $keys = base64_encode("WilEdi2019");
+        $keys = base64_encode("Aliang2020");
         $e = preg_replace("/".$keys."/", "", $e,1);
         $e = json_decode($e);  
                                             if ($flag) echo "<hr>";

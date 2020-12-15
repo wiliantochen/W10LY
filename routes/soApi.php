@@ -20,43 +20,19 @@ $router->get('user/{id}/{name}', function ($id, $name) {
 });
 
 
-// $router->group(['middleware'=> 'cors'], function($router) {
-	$router->group(['middleware'=> 'so'], function($router) {
-		$router->post('login', 'Forms\cAUTH@Login');
-		
-		// Below is testing...
-		$router->get('ListMenuXXX', 'AuthController@LoadListUserMenuXXX');
-		$router->get('getDEF', function () {
-		    // return 'DEF';
-		    return response()->json(['user_not_found'], 404);
-	        return response()->json([
-	                            'success'=>false,
-	                            'message'=>'',
-	                            'dateInfo'=>'dateInfo',
-	                            'token'=>'token'
-	                        ]);
-		});		
-		$router->post('postDEF', function () {
-		    // return 'DEF';
-		    // return response()->json(['user_not_found'], 404);
-	        return response()->json([
-	                            'success'=>false,
-	                            'message'=>'',
-	                            'dateInfo'=>'dateInfo',
-	                            'token'=>'token'
-	                        ]);
-		});		
-	});
-// });
+$router->group(['middleware'=> 'so'], function($router) {
+	$router->post('login', 'Forms\cAUTH@Login');
+	// Below is testing...
+	$router->get('ListMenuXXX', 'AuthController@LoadListUserMenuXXX');
+});
 
 $router->group(['middleware'=> ['auth']], function($router) {	
-// $router->group(['middleware'=> ['cors','auth']], function($router) {	
 	$router->group(['middleware'=> 'so'], function($router) {
 		$router->get('getData', 'cSORouter@Panggil');
 		$router->post('postData', 'cSORouter@Kirim');
 		$router->get('printData', 'cSORouter@Cetak');
 		// Below is testing...
-		$router->get('testToken', 'AuthController@test');
+		$router->get('testToken', 'Forms\cAUTH@test');
 		$router->get('userLogin', 'AuthController@getUserLogin');
 		$router->get('testGrid', 'AuthController@grid');
 	});

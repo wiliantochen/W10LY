@@ -9,7 +9,29 @@ class cSORouter extends Controller
 {
     //
 
-    public function Panggil(Request $request) {
+
+    public function Panggil(Request $request)
+    {
+
+
+        try {            
+            $RoutePath = $request->Controller."@".$request->Method;
+            // dd($RoutePath);
+            $Hasil = App::call('\App\Http\Controllers\Forms\\'.$RoutePath);
+            $Hasil = json_encode($Hasil);
+            $Hasil = json_decode($Hasil, true);
+            $Hasil = json_encode($Hasil['original']);
+            return fnEnCrypt($Hasil);           
+            // return $Hasil;           
+        } catch (\Exception $e) {
+            dd($e);
+            return response()->json(['gagal_panggil_link'], 404);
+        }
+
+    }    
+
+
+    public function xxxxPanggil(Request $request) {
 
         try {
          //    $DataJSon = fnDecrypt($request->Data, "");

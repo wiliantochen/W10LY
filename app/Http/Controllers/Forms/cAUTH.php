@@ -99,130 +99,62 @@ class cAUTH extends cSOController {
         }
 
 
-        $Hasil = compact('token');
-        $Hasil['date'] = date('Ymd_His');
-        // dd($Hasil);
-        return response()->json($Hasil);    
+        // $Hasil = compact('token');
+        // $Hasil['date'] = date('Ymd_His');
+        // // dd($Hasil);
+        // return response()->json($Hasil);    
 
-        // $UserClientInfo = $_SERVER['REMOTE_ADDR'].gethostbyaddr($_SERVER['REMOTE_ADDR']);
-        $UserClientInfo = $_SERVER['REMOTE_ADDR'];
-        $AppName = $request->AppName.$request->SCCOMP;
-        // begin generate token
-        $Koneksi = DB::connection()->getConfig("host").DB::connection()->getDatabaseName().$AppName;
-        $Date = date('Ymd_His');
-        $token = $Koneksi."".$Date."".$request->TUUSER.$UserClientInfo;
-        $token = fnEncryptPassword("Aliang2020".$token);            
-        $tokenvalue = fnEncryptPassword("Aliang2020".$token);
-        // end generate token
+        // // $UserClientInfo = $_SERVER['REMOTE_ADDR'].gethostbyaddr($_SERVER['REMOTE_ADDR']);
+        // $UserClientInfo = $_SERVER['REMOTE_ADDR'];
+        // $AppName = $request->AppName.$request->SCCOMP;
+        // // begin generate token
+        // $Koneksi = DB::connection()->getConfig("host").DB::connection()->getDatabaseName().$AppName;
+        // $Date = date('Ymd_His');
+        // $token = $Koneksi."".$Date."".$request->TUUSER.$UserClientInfo;
+        // $token = fnEncryptPassword("Aliang2020".$token);            
+        // $tokenvalue = fnEncryptPassword("Aliang2020".$token);
+        // // end generate token
 
         // $a = array("Koneksi"=>$Koneksi,"Date"=>$Date,"Token"=>$token,"TokenValue"=>$tokenvalue);
         // dd($a);
 
+        $Date = date('Ymd_His');
         return response()->json([
                             'success'=>true,
                             'message'=>'',
                             'dateInfo'=>$Date,
-                            'token'=>$token
+                            'token'=>compact('token')['token']
                         ]);
 
 
     }
 
-    public function xxxLogin(Request $request) {
 
-        
-        $DataJSon = fnDecrypt($request->Data, "");
-        // echo ;
-        if (is_null($DataJSon)) {
-            return response()->Json(fnProtectHack());
-        }
-
-        foreach($DataJSon as $row => $value) {  // Begin Looping DataJSon
-            $request->request->add(array($row => $value));
-        }  // End Looping DataJSon
-
-
-        $SYSCOM = SYSCOM::where('SCCOMP',$request->SCCOMP)->first();
-
-        $TBLUSR = TBLUSR::select('TUUSER', 'TUPSWD')
-                ->where([
-                    ['TUCOMPIY', '=', $SYSCOM->SCCOMPIY],
-                    ['TUUSER', '=', $request->TUUSER],
-                  ])
-                ->get();     
-
-// echo "Password : (".fnEncryptPassword($request->TUPSWD).") ";
-// dd($TBLUSR->toArray());
-
-        $Sukses = false;
-		if (count($TBLUSR)==0) {
-	        $Sukses = false;
-		} else {
-            $arr_TBLUSR = $TBLUSR[0];
-            if ($request->TUPSWD=="") { 
-                $Sukses = false; 
-            } else if (rtrim($arr_TBLUSR['TUPSWD'])==fnEncryptPassword($request->TUPSWD)) { 
-                $Sukses = true; 
-            }
-		}   
-
-        if ($Sukses) {
-            // $UserClientInfo = $_SERVER['REMOTE_ADDR'].gethostbyaddr($_SERVER['REMOTE_ADDR']);
-            $UserClientInfo = $_SERVER['REMOTE_ADDR'];
-            $AppName = $request->AppName.$request->SCCOMP;
-            // begin generate token
-            $Koneksi = DB::connection()->getConfig("host").DB::connection()->getDatabaseName().$AppName;
-            $Date = date('Ymd_His');
-            $token = $Koneksi."".$Date."".$request->TUUSER.$UserClientInfo;
-            $token = fnEncryptPassword("WilEdi2019".$token);            
-            $tokenvalue = fnEncryptPassword("WilEdi2019".$token);
-            // end generate token
-
-            // begin generate cookies
-            $cookiesCode = DB::connection()->getConfig("host").DB::getDatabaseName().$AppName.$Date;
-
-            $cookiesToken = fnEncryptPassword("token".$cookiesCode);
-            $cookiesName = fnEncryptPassword("name".$cookiesCode);
-            $cookiesDate = fnEncryptPassword("dateInfo".$cookiesCode);
-
-            $cookiesTokenValue = $tokenvalue;
-            $cookiesNameValue = fnEncryptPassword($request->TUUSER.$Date);
-            $cookiesDateValue = fnEncryptPassword($Date);
-            // end generate cookies
-
-            return response()->json([
-                                'success'=>true,
-                                'message'=>'',
-                                'dateInfo'=>$Date,
-                                'token'=>$token
-                            ]);
-        } else {
-            // return response()->json(['success'=>false,'data'=>$TBLUSR,'token'=>'','Cookies_Name'=>'']);         
-            return response()->json([
-                                'success'=>false,
-                                'message'=>'Username and Password not match!!!',
-                                'dateInfo'=>'',
-                                'token'=>'']);         
-        }           
-
-    }
+    public function test(Request $request)
+    {
+        // dd($request->user());
+        return "Sukses Tokennya....";
+    }    
 
     public function CheckLogin(Request $request) {
-
-        // $UserClientInfo = $_SERVER['REMOTE_ADDR'].gethostbyaddr($_SERVER['REMOTE_ADDR']);
-        $UserClientInfo = $_SERVER['REMOTE_ADDR'];
-        $AppName = $request->AppName.$request->AppCompanyCode;  
-
-        $Koneksi = DB::connection()->getConfig("host").DB::connection()->getDatabaseName().$AppName;
+        // dd('masuk CheckLogin');
         $Date = $request->AppDateInfo;
-        $token = $Koneksi."".$Date."".$request->AppUserName.$UserClientInfo;
-        $token = fnEncryptPassword("WilEdi2019".$token);                 
+        return response()->json(['success'=>true,'message'=>'','dateInfo'=>$Date]);
 
-        if ( $token==$request->AppToken )  {
-            return response()->json(['success'=>true,'message'=>'','dateInfo'=>$Date]);
-        } else {
-            return response()->json(['success'=>false,'message'=>'','dateInfo'=>$Date]);
-        }
+        // // $UserClientInfo = $_SERVER['REMOTE_ADDR'].gethostbyaddr($_SERVER['REMOTE_ADDR']);
+        // $UserClientInfo = $_SERVER['REMOTE_ADDR'];
+        // $AppName = $request->AppName.$request->AppCompanyCode;  
+
+        // $Koneksi = DB::connection()->getConfig("host").DB::connection()->getDatabaseName().$AppName;
+        // $Date = $request->AppDateInfo;
+        // $token = $Koneksi."".$Date."".$request->AppUserName.$UserClientInfo;
+        // $token = fnEncryptPassword("WilEdi2019".$token);                 
+
+        // if ( $token==$request->AppToken )  {
+        //     return response()->json(['success'=>true,'message'=>'','dateInfo'=>$Date]);
+        // } else {
+        //     return response()->json(['success'=>false,'message'=>'','dateInfo'=>$Date]);
+        // }
 
     }    
 

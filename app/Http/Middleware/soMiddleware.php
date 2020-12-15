@@ -17,12 +17,23 @@ class soMiddleware
     {
         // dd('masuk sini soMiddleware');
         // dd($request);
-        if (!is_null($request->params['Data'])) {
-            $Data = fnDecrypt($request->params['Data']);
-            // dd($request->Data);
-            foreach ($Data as $key => $row) {
-                $request->request->add(array($key => $row));
+
+        if ($request->isMethod('POST')) {
+            if (!is_null($request->params['Data'])) {
+                $Data = fnDecrypt($request->params['Data']);
+                // dd($request->Data);
+                foreach ($Data as $key => $row) {
+                    $request->request->add(array($key => $row));
+                }
             }
+        } else {
+            if (!is_null($request->Data)) {
+                $Data = fnDecrypt($request->Data);
+                // dd($request->Data);
+                foreach ($Data as $key => $row) {
+                    $request->request->add(array($key => $row));
+                }
+            }            
         }
         // dd($request);
         return $next($request);
