@@ -25,7 +25,8 @@ class TBLUSRTableSeeder extends soSeeder
         $Admin->TUCOMPIY = '1';
         $Admin->TUUSER = 'ADMIN';
         $Admin->TUNAME = 'ADMINISTRATOR';
-        $Admin->TUPSWD = '0ebcc77dc72360d0eb8e9504c78d38bd';
+        // $Admin->TUPSWD = '0ebcc77dc72360d0eb8e9504c78d38bd';
+        $Admin->TUPSWD = '$2y$10$pRMWcHsILrkRDeTht0BjhuByizRxw4phL/dAX5G1FD22XNpunceYm'; // admin123
         $Admin->TURGID = 'Default';
         $Admin->TURGDT = Date("Y-m-d H:i:s");
         $Admin->TUCHID = 'Default';
@@ -43,7 +44,8 @@ class TBLUSRTableSeeder extends soSeeder
         $DemoUser->TUCOMPIY = '1';
         $DemoUser->TUUSER = 'DEMO';
         $DemoUser->TUNAME = 'USER DEMO';
-        $DemoUser->TUPSWD = '0ebcc77dc72360d0eb8e9504c78d38bd';
+        // $DemoUser->TUPSWD = '0ebcc77dc72360d0eb8e9504c78d38bd';
+        $DemoUser->TUPSWD = '$2y$10$pRMWcHsILrkRDeTht0BjhuByizRxw4phL/dAX5G1FD22XNpunceYm'; // admin123
         $DemoUser->TURGID = 'Default';
         $DemoUser->TURGDT = Date("Y-m-d H:i:s");
         $DemoUser->TUCHID = 'Default';
@@ -62,7 +64,8 @@ class TBLUSRTableSeeder extends soSeeder
         $Admin->TUCOMPIY = '2';
         $Admin->TUUSER = 'ADMIN';
         $Admin->TUNAME = 'ADMINISTRATOR';
-        $Admin->TUPSWD = '0ebcc77dc72360d0eb8e9504c78d38bd';
+        // $Admin->TUPSWD = '0ebcc77dc72360d0eb8e9504c78d38bd';
+        $Admin->TUPSWD = '$2y$10$pRMWcHsILrkRDeTht0BjhuByizRxw4phL/dAX5G1FD22XNpunceYm'; // admin123
         $Admin->TURGID = 'Default';
         $Admin->TURGDT = Date("Y-m-d H:i:s");
         $Admin->TUCHID = 'Default';

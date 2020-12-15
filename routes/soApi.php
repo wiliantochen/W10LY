@@ -20,19 +20,41 @@ $router->get('user/{id}/{name}', function ($id, $name) {
 });
 
 
-$router->group(['middleware'=> 'cors'], function($router) {
+// $router->group(['middleware'=> 'cors'], function($router) {
 	$router->group(['middleware'=> 'so'], function($router) {
 		$router->post('login', 'Forms\cAUTH@Login');
+		
 		// Below is testing...
 		$router->get('ListMenuXXX', 'AuthController@LoadListUserMenuXXX');
+		$router->get('getDEF', function () {
+		    // return 'DEF';
+		    return response()->json(['user_not_found'], 404);
+	        return response()->json([
+	                            'success'=>false,
+	                            'message'=>'',
+	                            'dateInfo'=>'dateInfo',
+	                            'token'=>'token'
+	                        ]);
+		});		
+		$router->post('postDEF', function () {
+		    // return 'DEF';
+		    // return response()->json(['user_not_found'], 404);
+	        return response()->json([
+	                            'success'=>false,
+	                            'message'=>'',
+	                            'dateInfo'=>'dateInfo',
+	                            'token'=>'token'
+	                        ]);
+		});		
 	});
-});
+// });
 
-$router->group(['middleware'=> ['cors','auth']], function($router) {	
+$router->group(['middleware'=> ['auth']], function($router) {	
+// $router->group(['middleware'=> ['cors','auth']], function($router) {	
 	$router->group(['middleware'=> 'so'], function($router) {
-		$router->get('getData', 'cWeRouter@Panggil');
-		$router->post('postData', 'cWeRouter@Kirim');
-		$router->get('printData', 'cWeRouter@Cetak');
+		$router->get('getData', 'cSORouter@Panggil');
+		$router->post('postData', 'cSORouter@Kirim');
+		$router->get('printData', 'cSORouter@Cetak');
 		// Below is testing...
 		$router->get('testToken', 'AuthController@test');
 		$router->get('userLogin', 'AuthController@getUserLogin');
@@ -47,6 +69,22 @@ $router->group(['middleware'=> ['cors','auth']], function($router) {
 Route Yang Di Bawah Untuk Testing...
 ================================================================================================================
 */
+$router->get('getABC', function () {
+    return response()->json([
+                        'success'=>false,
+                        'message'=>'',
+                        'dateInfo'=>'dateInfo',
+                        'token'=>'token'
+                    ]);
+});
+$router->post('postABC', function () {
+    return response()->json([
+                        'success'=>false,
+                        'message'=>'',
+                        'dateInfo'=>'dateInfo',
+                        'token'=>'token'
+                    ]);
+});
 
 $router->get('DataDummy', 'Forms\cDUMMYDATA@Coba');
 // $router->get('PrintForm', 'Forms\cPHHEAD@PrintForm');

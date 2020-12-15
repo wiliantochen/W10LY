@@ -15,18 +15,28 @@ class CorsMiddleware
      */
     public function handle($request, Closure $next)
     {
+        // dd('masuk sini CorsMiddleware');
            
        //RULE HEADERSNYA HARUS KITA SET SECARA SPESIFIK SEPERTI INI 
         $headers = [
             'Access-Control-Allow-Origin'      => '*',
             // 'Access-Control-Allow-Origin'      => 'localhost',
-            'Access-Control-Allow-Methods'     => 'POST, GET, OPTIONS, PUT, DELETE, WWWWWW',
+            // 'Access-Control-Allow-Origin'      => 'http://localhost:8081',
+            'Access-Control-Allow-Methods'     => 'POST, GET, OPTIONS, PUT, DELETE, lumen',
             'Access-Control-Allow-Credentials' => 'true',
             'Access-Control-Max-Age'           => '86400',
-            'Access-Control-Allow-Headers'     => 'Content-Type, Authorization, X-Requested-With',
+            'Access-Control-Allow-Headers'     => 'Content-Type, Accept, Authorization, X-Requested-With, Origin',
             'Authorization'     => 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6OTk5OVwvbG9naW4iLCJpYXQiOjE1OTgzNjEzMDMsImV4cCI6MTU5ODM2NDkwMywibmJmIjoxNTk4MzYxMzAzLCJqdGkiOiJObFhIeHZHbEIyQ2ZSVkNHIiwic3ViIjoiQURNSU4iLCJwcnYiOiJhOTgzMmE1ZDhhOTI5NmY5MjY5ZDEyODRlNjlhZDdhNWI4YmMwMjYzIn0.lxF96_xOeqiQXGPO6BtkCz6KBRg7VuY0Hv7XgFnWM78',
         ];
-        
+
+        // $headers = [
+        //     'Access-Control-Allow-Origin'      => '*',
+        //     'Access-Control-Allow-Methods'     => '*',
+        //     'Access-Control-Allow-Credentials' => 'true',
+        //     'Access-Control-Max-Age'           => '0',
+        //     'Access-Control-Allow-Headers'     => '*',
+        // ];
+
         // $headers = [];
 
         //TAPI JIKA METHOD YANG MASUK ADALAH OPTIONS
@@ -40,7 +50,7 @@ class CorsMiddleware
         foreach ($headers as $key => $row) {
             $response->header($key, $row);
         }
-        
+
         return $response;
     }
 

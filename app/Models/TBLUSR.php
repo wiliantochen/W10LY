@@ -4,6 +4,13 @@ namespace App\Models;
 
 use App\Models\soModel;
 
+use Illuminate\Auth\Authenticatable;
+use Laravel\Lumen\Auth\Authorizable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+
 /**
  * @property int $TUCOMPIY
  * @property int $TUUSERIY
@@ -41,8 +48,9 @@ use App\Models\soModel;
  * @property string $TUCSNO
  * @property Syscom $syscom
  */
-class TBLUSR extends soModel
+class TBLUSR extends soModel implements JWTSubject, AuthenticatableContract, AuthorizableContract
 {
+    use Authenticatable, Authorizable;
     /**
      * The table associated with the model.
      * 
@@ -76,4 +84,37 @@ class TBLUSR extends soModel
     {
         return $this->belongsTo('App\Models\Syscom', 'TUCOMPIY', 'SCCOMPIY');
     }
+
+
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'TUPSWD',
+    ];
+
+    public function getJWTIdentifier()
+    {
+        // return $this->getKey();
+        return $this->TUUSER;
+    }
+
+
+    public function getAuthPassword () 
+    {
+        return $this->TUPSWD;
+    }
+
+    public function getAuthIdentifierName()
+    {
+        return 'TUUSER';
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+        
 }

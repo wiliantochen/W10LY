@@ -3,6 +3,8 @@ namespace App\Http\Controllers\Forms;
 
 use App\Http\Controllers\cSOController; //as cSOController
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\JWTAuth;
+
 use App\Models\SYSCOM;
 use App\Models\TBLUSR;
 use App\Models\SYSMNU;
@@ -16,7 +18,118 @@ class cAUTH extends cSOController {
         http://localhost:8099/laravelwili/index.php/getData?Data=fSJmZHNhIjoiUkVTVVVUIiwibmlnb0wiOiJkb2h0ZU0iLCJyZXNVX2MiOiJyZWxsb3J0bm9DIns=
     */
 
-    public function Login(Request $request) {
+    /**
+     * @var \Tymon\JWTAuth\JWTAuth
+     */
+    protected $jwt;
+
+    public function __construct(JWTAuth $jwt)
+    {
+        $this->jwt = $jwt;
+    }
+
+
+
+    public function Login(Request $request)
+    {
+        // $this->validate($request, [
+        //     'email'    => 'required|email|max:255',
+        //     'password' => 'required',
+        // ]);
+
+        // dd('auth dulu');
+
+        $this->validate($request, [
+            'SCCOMP' => 'required',
+            'TUUSER' => 'required',
+            'TUPSWD' => 'required',
+        ]);
+
+        $request->request->add(array('user' => $request->input('TUUSER')));
+        $request->request->add(array('pwrd' => $request->input('TUPSWD')));
+
+        // dd($request);
+
+        try {
+
+            $SYSCOM = SYSCOM::where('SCCOMP', '=', $request->input('SCCOMP'))->first();
+            if ($SYSCOM == null) {                
+                return response()->json(['Access_Code_not_found'], 404);
+            }
+
+            $TBLUSR = TBLUSR::select('TUUSER', 'TUPSWD')
+                    ->where([
+                        ['TUCOMPIY', '=', $SYSCOM->SCCOMPIY],
+                        ['TUUSER', '=', $request->TUUSER],
+                      ])
+                    ->get();     
+
+            $credentials = $request->only('TUUSER');
+            $credentials['TUCOMPIY'] = $SYSCOM->SCCOMPIY;
+            $credentials['TUUSER'] = $request->input('TUUSER');
+            $credentials['password'] = $request->input('TUPSWD');
+            
+            /*
+             | Note :
+             | app('hash')->make('admin123'); jadi harus pakai hash
+             | karena password_verify('','') --> sintax ini dari PHP
+             |
+             |
+             $a = app('hash')->make('admin123'); //-->"$2y$10$pRMWcHsILrkRDeTht0BjhuByizRxw4phL/dAX5G1FD22XNpunceYm"
+             dd($a);
+             */
+
+            if (! $token = $this->jwt->attempt($credentials)) {            
+                return response()->json(['user_not_found'], 404);
+            }
+
+
+        } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+
+            return response()->json(['token_expired'], 500);
+
+        } catch (\Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], 500);
+
+        } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+
+            return response()->json(['token_absent' => $e->getMessage()], 500);
+
+        }
+
+
+        $Hasil = compact('token');
+        $Hasil['date'] = date('Ymd_His');
+        // dd($Hasil);
+        return response()->json($Hasil);    
+
+        // $UserClientInfo = $_SERVER['REMOTE_ADDR'].gethostbyaddr($_SERVER['REMOTE_ADDR']);
+        $UserClientInfo = $_SERVER['REMOTE_ADDR'];
+        $AppName = $request->AppName.$request->SCCOMP;
+        // begin generate token
+        $Koneksi = DB::connection()->getConfig("host").DB::connection()->getDatabaseName().$AppName;
+        $Date = date('Ymd_His');
+        $token = $Koneksi."".$Date."".$request->TUUSER.$UserClientInfo;
+        $token = fnEncryptPassword("Aliang2020".$token);            
+        $tokenvalue = fnEncryptPassword("Aliang2020".$token);
+        // end generate token
+
+        // $a = array("Koneksi"=>$Koneksi,"Date"=>$Date,"Token"=>$token,"TokenValue"=>$tokenvalue);
+        // dd($a);
+
+        return response()->json([
+                            'success'=>true,
+                            'message'=>'',
+                            'dateInfo'=>$Date,
+                            'token'=>$token
+                        ]);
+
+
+    }
+
+    public function xxxLogin(Request $request) {
+
         
         $DataJSon = fnDecrypt($request->Data, "");
         // echo ;
@@ -82,10 +195,7 @@ class cAUTH extends cSOController {
                                 'message'=>'',
                                 'dateInfo'=>$Date,
                                 'token'=>$token
-                            ])
-                            ->withCookie(cookie($cookiesToken, $cookiesTokenValue, 1))
-                            ->withCookie(cookie($cookiesName, $cookiesNameValue, 1))
-                            ->withCookie(cookie($cookiesDate, $cookiesDateValue, 1));
+                            ]);
         } else {
             // return response()->json(['success'=>false,'data'=>$TBLUSR,'token'=>'','Cookies_Name'=>'']);         
             return response()->json([

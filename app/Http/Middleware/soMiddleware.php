@@ -16,15 +16,15 @@ class soMiddleware
     public function handle($request, Closure $next)
     {
         // dd('masuk sini soMiddleware');
-        if (!is_null($request->data)) {
-            $Data = fnDecrypt($request->data);
-            // dd($request->data);
+        // dd($request);
+        if (!is_null($request->params['Data'])) {
+            $Data = fnDecrypt($request->params['Data']);
+            // dd($request->Data);
             foreach ($Data as $key => $row) {
                 $request->request->add(array($key => $row));
             }
         }
-        // dd($response);
-
+        // dd($request);
         return $next($request);
     }
 }
