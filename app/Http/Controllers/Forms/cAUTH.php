@@ -57,12 +57,12 @@ class cAUTH extends cSOController {
                 return response()->json(['Access_Code_not_found'], 404);
             }
 
-            $TBLUSR = TBLUSR::select('TUUSER', 'TUPSWD')
+            $TBLUSR = TBLUSR::select('TUUSER', 'TUPSWD', 'TUUSERIY' )
                     ->where([
                         ['TUCOMPIY', '=', $SYSCOM->SCCOMPIY],
                         ['TUUSER', '=', $request->TUUSER],
                       ])
-                    ->get();     
+                    ->first();     
 
             $credentials = $request->only('TUUSER');
             $credentials['TUCOMPIY'] = $SYSCOM->SCCOMPIY;
@@ -98,6 +98,18 @@ class cAUTH extends cSOController {
 
         }
 
+
+
+        DB::table('TBLUSR')
+            ->where('TUUSERIY','=',$TBLUSR->TUUSERIY)                    
+            ->update(['TULSLI' => date('Y-m-d H:i:s')]);
+
+        //TULSLI
+        /*
+                DB::table('TBLUSR')
+                    ->where('TUUSERIY','=',$TBLUSR->TUUSERIY)                    
+                    ->update(['TULSLI' =>now()]);
+        */
 
         // $Hasil = compact('token');
         // $Hasil['date'] = date('Ymd_His');
@@ -138,23 +150,47 @@ class cAUTH extends cSOController {
 
     public function CheckLogin(Request $request) {
         // dd('masuk CheckLogin');
+        // auth()->invalidate(); // auth()->invalidate(true);    
+        // auth()->logout();
+
+        // auth()->refresh();    
+        // $token = auth()->fromUser(auth()->user());
+        // dd($token);
+
+        // dd(auth()->factory()->getTTL() * 60);
+
+        // $TBLUSR = $request->user();
+        // dd($TBLUSR);
+
+
+        // DB::table('TBLUSR')
+        //     ->where('TUUSERIY','=',1)                    
+        //     ->update(['TULSLI' => date('Y-m-d H:i:s')]);
+
+        $TBLUSR = $request->user();
+        $token = "";
+        $expire_auth    = (auth()->factory()->getTTL() * 60);
+        // dd($expire_auth);
+        // $waktu_awal     =strtotime("2019-10-11 00:01:25");
+        // $waktu_akhir    =strtotime("2019-10-12 12:07:59"); // bisa juga waktu sekarang now()
+        $waktu_awal     = strtotime($TBLUSR->TULSLI);
+        $waktu_akhir    = strtotime(date('Y-m-d H:i:s')); // bisa juga waktu sekarang now()
+        //menghitung selisih dengan hasil detik
+        $diff           = $waktu_akhir - $waktu_awal;
+        // dd($diff);
+        
+        $diff_auth = $expire_auth - $diff;
+        if ( $diff_auth >= 0 && $diff_auth <= 300) {
+            DB::table('TBLUSR')
+                ->where('TUUSERIY','=',$TBLUSR->TUUSERIY)                    
+                ->update(['TULSLI' => date('Y-m-d H:i:s')]);
+            $token = auth()->fromUser(auth()->user());
+            // dd("Sudah mau expired!!! ".$diff_auth." -> ".date('Y-m-d H:i:s'));            
+        }
+        // dd($diff_auth." -> ".date('Y-m-d H:i:s'));
+
         $Date = $request->AppDateInfo;
-        return response()->json(['success'=>true,'message'=>'','dateInfo'=>$Date]);
-
-        // // $UserClientInfo = $_SERVER['REMOTE_ADDR'].gethostbyaddr($_SERVER['REMOTE_ADDR']);
-        // $UserClientInfo = $_SERVER['REMOTE_ADDR'];
-        // $AppName = $request->AppName.$request->AppCompanyCode;  
-
-        // $Koneksi = DB::connection()->getConfig("host").DB::connection()->getDatabaseName().$AppName;
-        // $Date = $request->AppDateInfo;
-        // $token = $Koneksi."".$Date."".$request->AppUserName.$UserClientInfo;
-        // $token = fnEncryptPassword("WilEdi2019".$token);                 
-
-        // if ( $token==$request->AppToken )  {
-        //     return response()->json(['success'=>true,'message'=>'','dateInfo'=>$Date]);
-        // } else {
-        //     return response()->json(['success'=>false,'message'=>'','dateInfo'=>$Date]);
-        // }
+        return response()->json(['success'=>true,'message'=>'','dateInfo'=>$Date,'token'=>$token]);
 
     }    
 
@@ -172,8 +208,8 @@ class cAUTH extends cSOController {
                 
     }    
 
-    public function Logout(Request $request) {
-    
+    public function Logout(Request $request) {    
+        auth()->invalidate(); // auth()->invalidate(true);   
     }
 
 
@@ -206,13 +242,13 @@ class cAUTH extends cSOController {
 
         */
 
-        $USERIY = fnGetRec('TBLUSR','TUUSERIY','TUUSER',$request->Username,'');
+        $TBLUSR = $request->user();
 
         $SYSMNU = DB::table('SYSMNU')
                 ->select('SMMENU', 'SMNOMR', 'SMSCUT', 'SMMENUIY', 'SMACES', 'TAACES', 'SMURLW', 'SMGRUP')
-                ->leftJoin('TBLUAM', function($join) use($USERIY) {
+                ->leftJoin('TBLUAM', function($join) use($TBLUSR) {
                     $join->on('TAMENUIY', '=', 'SMMENUIY');
-                    $join->where('TAUSERIY', '=', $USERIY->TUUSERIY);
+                    $join->where('TAUSERIY', '=',  $TBLUSR->TUUSERIY);
                 })
                 ->where([
                     ['SMDPFG', '=', '1'],

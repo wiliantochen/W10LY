@@ -21,8 +21,8 @@ class cSORouter extends Controller
             $Hasil = json_encode($Hasil);
             $Hasil = json_decode($Hasil, true);
             $Hasil = json_encode($Hasil['original']);
-            return fnEnCrypt($Hasil);           
             // return $Hasil;           
+            return fnEnCrypt($Hasil);           
         } catch (\Exception $e) {
             dd($e);
             return response()->json(['gagal_panggil_link'], 404);
