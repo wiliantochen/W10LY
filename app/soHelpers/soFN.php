@@ -837,7 +837,7 @@
 
         $TQSTMT = fnGetSqlSintax($QueryLog);
 
-        $CompIY = App::call('\App\Http\Controllers\cWeRequest@getCompIY');
+        $CompIY = App::call('\App\Http\Controllers\cSORequest@getCompIY');
 
         $TABLE = 'App\\Models\\TBLSLF';
         $TBLSLF = new $TABLE;
@@ -888,7 +888,7 @@
             'error_code' => $errorInfo[1]
         ];
 
-        $CompIY = App::call('\App\Http\Controllers\cWeRequest@getCompIY');
+        $CompIY = App::call('\App\Http\Controllers\cSORequest@getCompIY');
 
         $TEREMK = fnGetSqlSintax(DB::getQueryLog());
         $TEREMK .= $query;
