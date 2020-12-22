@@ -33,8 +33,8 @@ class soHelperServiceProvider extends ServiceProvider
         }
         /*
             Di Folder App
-            Harus tambahain Folder WilEdiHelpers
-            Jadi semua file yang ada di folder WilEdiHelpers akan selalu diload
+            Harus tambahain Folder soHelpers
+            Jadi semua file yang ada di folder soHelpers akan selalu diload
         */
     }
         

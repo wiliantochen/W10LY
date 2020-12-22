@@ -131,8 +131,9 @@ class cSYSMNU extends cSOController {
             return response()->jSon($HasilCheckBFCS);
         }
 
-
-        $UserName = $request->AppUserName;
+        $TBLUSR = $request->user();
+        $UserName = $TBLUSR->TUUSER;
+        // $UserName = $request->AppUserName;
 
         switch ($request->Mode) {
             case "1":

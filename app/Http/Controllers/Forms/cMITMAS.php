@@ -126,8 +126,11 @@ class cMITMAS extends cSOController {
             return response()->jSon($HasilCheckBFCS);
         }
 
-        $UserName = $request->AppUserName;
-        $fMITMAS['MMCOMPIY'] = fnGetCompIY($request->AppCompanyCode);
+        $TBLUSR = $request->user();
+        $UserName = $TBLUSR->TUUSER;
+        $fMITMAS['MMCOMPIY'] = $TBLUSR->TUCOMPIY;
+        // $UserName = $request->AppUserName;
+        // $fMITMAS['MMCOMPIY'] = fnGetCompIY($request->AppCompanyCode);
 
         switch ($request->Mode) {
             case "1":

@@ -112,8 +112,11 @@ class cUNTMAS extends cSOController {
             return response()->jSon($HasilCheckBFCS);
         }
 
-        $UserName = $request->AppUserName;
-        $fUNTMAS['UMCOMPIY'] = fnGetCompIY($request->AppCompanyCode);
+        $TBLUSR = $request->user();
+        $UserName = $TBLUSR->TUUSER;
+        $fUNTMAS['UMCOMPIY'] = $TBLUSR->TUCOMPIY;
+        // $UserName = $request->AppUserName;
+        // $fUNTMAS['UMCOMPIY'] = fnGetCompIY($request->AppCompanyCode);
 
         switch ($request->Mode) {
             case "1":

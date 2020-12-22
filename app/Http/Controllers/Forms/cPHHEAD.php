@@ -214,8 +214,11 @@ class cPHHEAD extends cSOController {
             return response()->jSon($HasilCheckBFCS);
         }
 
-        $UserName = $request->AppUserName;
-        $fPHHEAD['PHCOMPIY'] = fnGetCompIY($request->AppCompanyCode);
+        $TBLUSR = $request->user();
+        $UserName = $TBLUSR->TUUSER;
+        $fPHHEAD['PHCOMPIY'] = $TBLUSR->TUCOMPIY;
+        // $UserName = $request->AppUserName;
+        // $fPHHEAD['PHCOMPIY'] = fnGetCompIY($request->AppCompanyCode);
 
         switch ($request->Mode) {
             case "1":

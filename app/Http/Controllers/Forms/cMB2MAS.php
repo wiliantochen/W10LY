@@ -121,8 +121,11 @@ class cMB2MAS extends cSOController {
             return response()->jSon($HasilCheckBFCS);
         }
 
-        $UserName = $request->AppUserName;
-        $fMB2MAS['B2COMPIY'] = fnGetCompIY($request->AppCompanyCode);
+        $TBLUSR = $request->user();
+        $UserName = $TBLUSR->TUUSER;
+        $fMB2MAS['B2COMPIY'] = $TBLUSR->TUCOMPIY;
+        // $UserName = $request->AppUserName;
+        // $fMB2MAS['B2COMPIY'] = fnGetCompIY($request->AppCompanyCode);
 
         switch ($request->Mode) {
             case "1":

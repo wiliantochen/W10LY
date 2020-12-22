@@ -14,10 +14,12 @@ class cSORequest extends Controller
     }        
 
     public function getCompIY(Request $request) {
-        if (is_null($request->AppCompanyCode)) {
-            return "";
-        }
-        $Hasil = fnGetCompIY($request->AppCompanyCode);
+        $TBLUSR = $request->user();
+        $Hasil = $TBLUSR->TUUSERIY;
+        // if (is_null($request->AppCompanyCode)) {
+        //     return "";
+        // }
+        // $Hasil = fnGetCompIY($request->AppCompanyCode);
         return $Hasil;
     }        
 

@@ -196,8 +196,11 @@ class cBHHEAD extends cSOController {
             return response()->jSon($HasilCheckBFCS);
         }
 
-        $UserName = $request->AppUserName;
-        $fBHHEAD['BHCOMPIY'] = fnGetCompIY($request->AppCompanyCode);
+        $TBLUSR = $request->user();
+        $UserName = $TBLUSR->TUUSER;
+        $fBHHEAD['BHCOMPIY'] = $TBLUSR->TUCOMPIY;
+        // $UserName = $request->AppUserName;
+        // $fBHHEAD['BHCOMPIY'] = fnGetCompIY($request->AppCompanyCode);
 
         switch ($request->Mode) {
             case "1":

@@ -234,7 +234,13 @@ class crPHHEAD extends cSOController {
         $pathFile = storage_path(). '/recipe.pdf';
         $this->pdf->Output('F', $pathFile);
         $headers = ['Content-Type' => 'application/pdf'];
-        return response()->file($pathFile, $headers);
+        // return response()->file($pathFile, $headers);
+        // return response()->download($pathFile, "abc.pdf");
+        $filename = "recipe.pdf";
+        return response()->make(file_get_contents($pathFile), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="'.$filename.'"'
+        ]);
 
 
         // $Hasil = array( "Path"=> $pathFile);

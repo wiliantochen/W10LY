@@ -1,9 +1,35 @@
 https://github.com/wiliantochen/W10LY.git
 ------------------------------------------------------------------------------------------------------------------------
 
+Setelah dapat source dari GITHUB
+harus "composer update" --> supaya vendor vendor nya bisa masuk sesuai version program local
+
+
+-- Begin -- 
+-- ikut ketik saja 7 baris dibawah ini, pasti berhasil update versi composernya...
+-- ini untuk di hosting, dimana composernya tidak update
+
+	cd /tmp
+
+	curl -sS https://getcomposer.org/installer | php
+
+	mkdir ~/bin
+	 
+	mv composer.phar ~/bin/composer
+	 
+	chmod +x ~/bin/composer
+	 
+	echo "export PATH=$HOME/bin:$PATH" >> ~/.bash_profile
+	 
+	source ~/.bash_profile
+
+-- End --
+
+
 Command Dos C:\nginx\html\SOAPI\lumen new TOKO
 Command Dos C:\nginx\html\SOAPI\TOKO\php -S localhost:9999 -t public
 
+Command Dos C:\nginx\html\SOAPI\TOKO\php artisan cache:clear
 Command Dos C:\nginx\html\SOAPI\TOKO\php artisan config:cache --env=MySQL
 
 Command Dos C:\nginx\html\SOAPI\TOKO\composer require tymon/jwt-auth:"^1.0@dev"
@@ -28,9 +54,221 @@ Command Dos C:\nginx\html\Project01\L01\php artisan migrate:fresh --seed
 Command Dos C:\nginx\html\Project01\L01\php artisan db:seed --class=xxxxx 
 
 
+--------------------------------------------------------------------------------------------------------------------
+
+PDF
+
+Command Dos C:\nginx\html\Project01\composer require codedge/laravel-fpdf  --> Untuk masukin Vendor PDF
+
+
+Command Dos C:\nginx\html\Project01\php artisan vendor:publish --provider="Codedge\Fpdf\FpdfServiceProvider" --tag=config
+
+composer remove vendor/codedge
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+----QUASAR
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+NPM Update
+
+Stelah dapat source dari GITHUB
+harus "npm update" --> supaya dependency source nya bisa ke isi 
+
+
+
+Command Dos C:\nginx\html\Project01\quasar inti Q01
+
+Project Name : Q01
+Project Project Name : Q01
+Project Decription Name : Q01
+pilih : vuex, axios
+pilih : npm
+
+Tunggu sampai selesai install
+----------------------------------------------------------------------
+
+Sebelum jalanin sintax dibawah ini config js dulu (C:\nginx\html\myQua\Qua\quasar.conf.js)        
+Command Dos C:\nginx\html\Project01\q01\quasar dev
+
+----------------------------------------------------------------------
+
+didalam " build: " tambahin sintax ini
+Sebelum anda jalanin sintax diatas itu (quasar dev)
+
+      publicPath: '/Q01/',
+      env: ctx.dev
+        ? { // so on dev we'll have
+          API: JSON.stringify('http://localhost:9999/api/')
+          // API: JSON.stringify('http://172.30.9.32:8099/a5framework/lar/api/')
+        }
+        : { // and on build (production):
+          // API: JSON.stringify('http://172.30.1.39:8099/a5framework/lar/api/') // ikut IP server untuk laravel 
+          API: JSON.stringify('http://192.168.1.24:8099/a5framework/lar/api/') // ikut IP server untuk laravel 
+        },
+
+----------------------------------------------------------------------
+Jika component ini, tidak ke install saat quasar inti q01 (new Quasar Project)
+maka jalanin sintax dibawah ini
+
+To install them, you can run: 
+Command Dos C:\nginx\html\Project01\q01\npm install --save axios 
+Command Dos C:\nginx\html\Project01\q01\npm install --save vuelidate 
+Command Dos C:\nginx\html\Project01\q01\npm install vivus
+
+after that 
+Command Dos C:\nginx\html\Project01\q01\quasar new plugin axios
+Command Dos C:\nginx\html\Project01\q01\quasar new plugin vuelidate
+
+
+Setelah itu pergi ke C:\nginx\html\Project01\Q01\src\plugins\vuelidate.js
+
+    import Vuelidate from 'vuelidate'
+
+    export default ({ Vue }) => {
+      Vue.use(Vuelidate)
+    }
+
+
+----------------------------------------------------------------------
+Supaya Quasar bisa connect ke laravel
+Di laravel harus install ini
+
+Command Dos C:\nginx\html\Project01\l01\composer require barryvdh/laravel-cors
+
+setelah itu jalanin comment ini
+
+Command Dos C:\nginx\html\Project01\l01\php artisan vendor:publish --provider="Barryvdh\Cors\ServiceProvider"
+
+	----------------------------------------------
+	Setelah itu lagi, ke folder app\Http\Kernel.php
+	tambahin sintax ini 
+		\Barryvdh\Cors\HandleCors::class,
+	di protected $middleware
+
+	seperti contoh dibawah ini
+
+	C:\nginx\html\Project01\l01\app\Http\Kernel.php
+	    protected $middleware = [
+	        // ...
+	        \Barryvdh\Cors\HandleCors::class,
+	    ];
+	----------------------------------------------
+
+	C:\nginx\html\Project01\L01\config\cors.php
+	harus set ini true
+	    'supportsCredentials' => true,
+	----------------------------------------------
+
+
+
+----------------------------------------------------------------------
+Build Quasar (Compile)
+----------------------------------------------------------------------
+
+  quasar build
+
+
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+
+
+
+
+
+--******************************************************************--
+--******************************************************************--
+----LIVE LIVE LIVE
+--******************************************************************--
+--******************************************************************--
+
+
+wexits.com/cpanel
+U : u6165746
+P : terserah18
+
+ssh --> download key
+IP  : 83.136.216.123
+Port: 65002
+
+
+id_dsa_2
+
+------------------------------------------------
+
+buat Database Project01
+
+User MySQL (wexits.com)
+  u6165746_admin
+  4DM1nn
+
+
+lalu ke Project01
+  composer update
+
+
+------------------------------------------------
+
+untuk Rewriting non-existing links to index.php
+
+ini pasang di file .htaccess
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+
+
+------------------------------------------------
+
+
+
+
+
+Select *, @row_num := @row_num + 1 From (
+SElect SLSLNOIY, SHDATE, SLITNOIY, SLQTYS, SLHARG, SLTOTL, 'SLS' As MODL From SHLINE
+Left Join SHHEAD On SHSHNOIY = SLSHNOIY
+Union All
+SElect PLPLNOIY, PHDATE, PLITNOIY, PLQTYS, PLHARG, PLTOTL, 'PCH' As MODL From PHLINE
+Left Join PHHEAD On PHPHNOIY = PLPHNOIY
+) As A
+, (SELECT @row_num := 0) R
+
+
+
+Select 
+  *
+  , @row_num :=IF(  @key_val = ConCat(SLITNOIY,SHDATE) ,  @row_num + 1 , 1) As NoUrut 
+  , @key_val := ConCat(SLITNOIY,SHDATE)
+From (
+  Select SLSLNOIY, SHDATE, SLITNOIY, SLQTYS, SLHARG, SLTOTL, 'SLS' As MODL From SHLINE
+  Left Join SHHEAD On SHSHNOIY = SLSHNOIY
+  Union All
+  Select PLPLNOIY, PHDATE, PLITNOIY, PLQTYS, PLHARG, PLTOTL, 'PCH' As MODL From PHLINE
+  Left Join PHHEAD On PHPHNOIY = PLPHNOIY
+) As A
+, (SELECT @row_num := 0) R
+, (SELECT @key_val := 0) K
+
+
 ------------------------------------------------------------------------------------------------------------------------
+
 
 
 sencha app watch
 sencha app build classic production
 sencha app testing
+
+
+

@@ -47,10 +47,19 @@ class CorsMiddleware
 
         //SELAIN ITU, KITA AKAN MENERUSKAN RESPONSE SEPERTI BIASA DENGAN MENGIKUT SERTAKAN HEADERS YANG SUDAH DITETAPKAN.
         $response = $next($request);
-        foreach ($headers as $key => $row) {
-            $response->header($key, $row);
-        }
 
+        if(!method_exists($response, 'header')) {
+            $response->headers->set('Access-Control-Allow-Origin' , '*');
+            $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT, DELETE');
+            $response->headers->set('Access-Control-Allow-Credentials', 'true');
+            $response->headers->set('Access-Control-Max-Age', '86400');
+            $response->headers->set('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization, X-Requested-With, Application');
+        } else {
+            foreach ($headers as $key => $row) {
+                $response->header($key, $row);
+            }
+        }
+       
         return $response;
     }
 

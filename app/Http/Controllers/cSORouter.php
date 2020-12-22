@@ -59,29 +59,7 @@ class cSORouter extends Controller
     public function Cetak(Request $request) {
 
         try {
-         //    $DataJSon = fnDecrypt($request->Data, "");
-         //    echo $DataJSon;
-            // dd($request);
 
-            $DataJSon = fnDecrypt($request->Data, "");
-            // Begin Wilianto 2019 04 26
-            /*
-                Note: Sintax dibawah ini untuk ret
-                Jika Sintax is_null($DataJSon) ini tidak ada
-                maka akan ketauan coding anda...
-
-                Coba saja ketik address ini 
-                http://localhost:9999/api/getData?Data=xxxx
-
-            */
-            if (is_null($DataJSon)) { 
-                return response()->Json(fnProtectHack());
-            }
-            // End Wilianto 2019 04 26
-            foreach($DataJSon as $row => $value) {  // Begin Looping DataJSon
-                $request->request->add(array($row => $value));
-            }  // End Looping DataJSon
-// dd($request);
             $RoutePath = $request->Controller."@".$request->Method;
             $Hasil = App::call('\App\Http\Controllers\Reports\\'.$RoutePath);
             // $Hasil = json_encode($Hasil);
