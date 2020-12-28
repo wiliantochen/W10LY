@@ -8,6 +8,7 @@
         "php": "^7.2.5",
         "codedge/laravel-fpdf": "^1.7",
         "laravel/lumen-framework": "^7.0",
+        "phpoffice/phpspreadsheet": "^1.15",
         "tymon/jwt-auth": "^1.0@dev"
     },
     "require-dev": {

@@ -38,6 +38,9 @@ $router->group(['middleware'=> ['auth']], function($router) {
 	});
 });
 
+$router->get('exporttoexcel', 'Forms\cETE@getData');
+
+
 // $router->get('/coba', 'ExampleController@cobacoba');
 
 /*
@@ -61,6 +64,9 @@ $router->post('postABC', function () {
                         'token'=>'token'
                     ]);
 });
+
+$router->get('ete', 'Forms\cTES123@ETExxx');
+
 
 $router->get('DataDummy', 'Forms\cDUMMYDATA@Coba');
 // $router->get('PrintForm', 'Forms\cPHHEAD@PrintForm');

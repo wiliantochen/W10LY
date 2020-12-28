@@ -67,7 +67,11 @@ composer remove vendor/codedge
 
 --------------------------------------------------------------------------------------------------------------------
 
+install excel
 
+ke file php.ini nyalai ini --> extension=php_gd2.dll
+composer require phpoffice/phpspreadsheet
+composer require maatwebsite/excel
 
 
 ----------------------------------------------------------------------
@@ -173,6 +177,14 @@ Build Quasar (Compile)
 
   quasar build
 
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+</IfModule>
 
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------

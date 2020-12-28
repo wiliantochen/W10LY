@@ -13,6 +13,16 @@ use DB;
 
 class cTES123 extends cSOController {
 
+    public function ETExxx() {
+// dd('aaa');
+
+      $pathFile = storage_path(). '/hello world.xlsx';
+
+      $headers = ['Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+      return response()->download($pathFile, "hello world.xlsx", $headers);
+
+    }
+
     public function Coba() {
 // dd('aaa');
             $arrCSDT = fnGetRec("MITMAS", 

@@ -64,9 +64,9 @@
         $e = implode("",$c).implode("",$d); if ($flag) echo "<br>Digabung menjadi 1 : ".implode("",$c).implode("",$d)." <br>";
         $e = strrev($e);                    if ($flag) echo "<br>DiReverse : ".$e." <br>";
         $e = base64_decode($e);             if ($flag) echo "<br>Base64_Decode : ".$e." <br>";
-        $keys = base64_encode("Aliang2020");
-        $e = preg_replace("/".$keys."/", "", $e,1);
-        $e = json_decode($e);  
+        $keys = base64_encode("Aliang2020"); if ($flag) echo "<br>keys : ".$keys." <br>";
+        $e = preg_replace("/".$keys."/", "", $e,1); if ($flag) echo "<br>before : ".$e." <br>";
+        $e = json_decode($e);               if ($flag) echo "<br>final : ".$e." <br>";
                                             if ($flag) echo "<hr>";
         return $e;
 
@@ -1102,3 +1102,14 @@ Atas:
 /*======================================================================================================================*/
 /*======END REPORTING===================================================================================================*/
 /*======================================================================================================================*/
+
+
+function fnNumberOfDecimals($value) {
+    if ((int)$value == $value) {
+        return 0;
+    } else if (! is_numeric($value)) {
+        // throw new Exception('numberOfDecimals: ' . $value . ' is not a number!');
+        return false;
+    }
+    return strlen($value) - strrpos($value, '.') - 1;
+}
