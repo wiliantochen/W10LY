@@ -60,7 +60,13 @@ class cINF_PHHEAD extends cSOController {
                         "Filter"=> $this->GridFilter,
                         "Key"=> 'PLPLNOIY');
         // dd($Hasil);
-        return response()->jSon($Hasil);       
+        // return response()->jSon($Hasil);   
+        if(is_null($request->ETE)) {
+            return response()->jSon($Hasil);     
+        } else {
+            return response()->jSon($this->ExportToExcel($Hasil));
+        }
+    
 
     }
 

@@ -142,7 +142,6 @@ class cSOController extends Controller
       // dd($Hasil['Column']);
       // dd($Hasil['Data']);
 
-
 if (1==0) {
       $directory = storage_path(). '/tempExcel/';
 
@@ -269,6 +268,11 @@ if (1==0) {
                     $DecimalPoint = ".".str_repeat("0", $a);
                   }
                   $sheet->getStyle($cr)->getNumberFormat()->setFormatCode('#,##0'.$DecimalPoint);
+                  break;
+                case "DTP":
+                  $nilai = date("d-M-Y", strtotime($nilai));
+                  $sheet->getStyle($cr)->getNumberFormat()->setFormatCode('dd-mmm-yyyy');
+                  $sheet->setCellValue($cr, $nilai);
                   break;
                 case "TXT":
                   $sheet->setCellValueExplicit($cr, $nilai,

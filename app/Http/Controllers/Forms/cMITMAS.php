@@ -52,7 +52,13 @@ class cMITMAS extends cSOController {
                         "Sort"=> $this->GridSort,
                         "Filter"=> $this->GridFilter,
                         "Key"=> 'MMITNOIY');
-        return response()->jSon($Hasil);     
+        // return response()->jSon($Hasil);     
+        if(is_null($request->ETE)) {
+            return response()->jSon($Hasil);     
+        } else {
+            return response()->jSon($this->ExportToExcel($Hasil));
+        }
+
 
     }
 

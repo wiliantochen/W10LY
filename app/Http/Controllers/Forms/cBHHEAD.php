@@ -49,7 +49,13 @@ class cBHHEAD extends cSOController {
                         "Filter"=> $this->GridFilter,
                         "Key"=> 'BHBHNOIY');
         // dd($Hasil);
-        return response()->jSon($Hasil);     
+        // return response()->jSon($Hasil);     
+        if(is_null($request->ETE)) {
+            return response()->jSon($Hasil);     
+        } else {
+            return response()->jSon($this->ExportToExcel($Hasil));
+        }
+
 
     }
 

@@ -14,7 +14,9 @@ use DB;
 class cETE extends cSOController {
 
     public function getData(Request $request) {
-
+      /*
+        ini dipanggil di file quasar (Auth-extportToExcel)
+      */
       $pathFile = fnDecrypt($request->kunci)->path;
 
       $headers = ['Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
